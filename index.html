@@ -21,13 +21,13 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1120px;
     margin: 0 auto;
 }
 
 .hero {
     background: #0f2d44;
-    color: white;
+    color: #ffffff;
     padding: 24px;
     border-radius: 10px;
 }
@@ -42,7 +42,7 @@ body {
 }
 
 .card {
-    background: white;
+    background: #ffffff;
     border: 1px solid #d6e6ef;
     border-radius: 10px;
     padding: 20px;
@@ -69,23 +69,10 @@ h3 {
     color: #0f2d44;
 }
 
-a.calculator {
-    display: inline-block;
-    background: #0f2d44;
-    color: white;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 7px;
-}
-
-button {
-    font-family: Arial, sans-serif;
-}
-
 .primary-button {
     border: 0;
     background: #0f2d44;
-    color: white;
+    color: #ffffff;
     padding: 12px 18px;
     border-radius: 8px;
     font-size: 16px;
@@ -94,7 +81,7 @@ button {
 
 .secondary-button {
     border: 1px solid #0f2d44;
-    background: white;
+    background: #ffffff;
     color: #0f2d44;
     padding: 9px 13px;
     border-radius: 7px;
@@ -102,11 +89,26 @@ button {
     cursor: pointer;
 }
 
+button,
+input {
+    font-family: Arial, sans-serif;
+}
+
 button:hover,
 button:focus,
-a:focus {
+a:focus,
+input:focus {
     outline: 3px solid #b7d7e8;
     outline-offset: 2px;
+}
+
+.calculator {
+    display: inline-block;
+    background: #0f2d44;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 7px;
 }
 
 label {
@@ -115,12 +117,8 @@ label {
     margin-top: 14px;
 }
 
-input {
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-}
-
 .name-input {
+    display: block;
     width: 100%;
     max-width: 500px;
     padding: 10px;
@@ -129,9 +127,35 @@ input {
     font-size: 16px;
 }
 
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-wrap {
+    margin-top: 18px;
+}
+
+.progress-bar {
+    height: 18px;
+    background: #d6e6ef;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #3ca65c;
+    transition: width 0.3s ease;
+}
+
+/* =====================================================
+   ACTIVITY LAYOUT
+===================================================== */
+
 .workspace-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 370px;
+    grid-template-columns: minmax(0, 1fr) 390px;
     gap: 20px;
     align-items: start;
 }
@@ -147,104 +171,123 @@ input {
 .problem-display {
     text-align: center;
     font-size: 32px;
-    margin: 25px 0;
+    margin: 28px 0;
 }
+
+/* =====================================================
+   MATH DISPLAY
+===================================================== */
 
 .radical {
     display: inline-flex;
     align-items: flex-start;
     white-space: nowrap;
-}
-
-.root-index {
-    font-size: 0.5em;
-    margin-right: -2px;
-    margin-top: -5px;
+    vertical-align: middle;
 }
 
 .root-symbol {
-    font-size: 1.22em;
+    font-size: 1.25em;
     line-height: 1;
 }
 
 .radicand {
+    display: inline-block;
     border-top: 2px solid currentColor;
-    padding: 1px 5px 0 5px;
-    line-height: 1.05;
+    padding: 2px 5px 0 5px;
+    line-height: 1.08;
 }
 
-.fraction {
+/*
+   FRACTION UNDER A RADICAL
+
+   The entire fraction is placed inside .radicand.
+   Therefore the radical bar spans BOTH the numerator
+   and denominator, not just the numerator.
+*/
+
+.full-fraction {
     display: inline-flex;
     flex-direction: column;
+    align-items: stretch;
     text-align: center;
+    min-width: 70px;
     vertical-align: middle;
 }
 
-.fraction-top {
-    padding: 0 5px 2px 5px;
+.fraction-numerator {
+    display: block;
+    padding: 0 8px 4px 8px;
 }
 
-.fraction-bottom {
-    border-top: 1.5px solid currentColor;
-    padding: 2px 5px 0 5px;
+.fraction-denominator {
+    display: block;
+    border-top: 2px solid currentColor;
+    padding: 4px 8px 0 8px;
 }
 
-/* ANSWER RADICAL */
+/* =====================================================
+   OPEN RADICAL ANSWER
+===================================================== */
 
 .answer-heading {
     text-align: center;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin: 18px 0 6px;
 }
 
 .radical-answer {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-wrap: nowrap;
     margin: 18px 0;
-    min-height: 75px;
 }
 
 .outside-answer {
-    width: 110px;
+    width: 120px;
     height: 48px;
-    padding: 5px 8px;
+    margin-top: 14px;
+    padding: 6px 8px;
     border: 2px solid #71838e;
     border-radius: 6px;
     text-align: center;
-    margin-top: 15px;
+    font-size: 20px;
 }
 
 .answer-root-symbol {
-    font-size: 57px;
+    font-size: 58px;
     line-height: 1;
-    margin-left: 5px;
+    margin-left: 6px;
 }
 
-.inside-wrap {
+.answer-radicand {
+    display: inline-block;
     border-top: 3px solid #1f2933;
-    padding-top: 5px;
-    margin-top: 5px;
+    padding: 5px 4px 0 4px;
+    margin-top: 4px;
 }
 
 .inside-answer {
-    width: 120px;
+    width: 125px;
     height: 48px;
-    padding: 5px 8px;
+    padding: 6px 8px;
     border: 2px solid #71838e;
     border-radius: 6px;
     text-align: center;
+    font-size: 20px;
 }
 
 .answer-labels {
     display: flex;
     justify-content: center;
-    gap: 65px;
+    gap: 68px;
     margin-top: -8px;
-    font-size: 14px;
     color: #52616b;
+    font-size: 14px;
 }
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
 
 .feedback {
     display: none;
@@ -265,25 +308,9 @@ input {
     border-left: 6px solid #f2b705;
 }
 
-.progress-wrap {
-    margin-top: 18px;
-}
-
-.progress-bar {
-    height: 18px;
-    background: #d6e6ef;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #3ca65c;
-    transition: width 0.3s ease;
-}
-
-/* WHITEBOARD */
+/* =====================================================
+   WHITEBOARD
+===================================================== */
 
 .whiteboard-panel {
     position: sticky;
@@ -302,8 +329,8 @@ input {
 canvas {
     display: block;
     width: 100%;
-    height: 360px;
-    background: white;
+    height: 390px;
+    background: #ffffff;
     border: 2px solid #71838e;
     border-radius: 8px;
     touch-action: none;
@@ -320,40 +347,118 @@ input[type="range"] {
     width: 100%;
 }
 
-.certificate {
+/* =====================================================
+   FINAL MASTERY REPORT
+===================================================== */
+
+#masteryReport {
     display: none;
-    background: white;
-    border: 8px double #0f2d44;
-    padding: 38px;
-    text-align: center;
+    background: #ffffff;
     margin-top: 24px;
 }
 
-.certificate h2 {
-    font-size: 34px;
-    margin-bottom: 5px;
+.report-title {
+    background: #0f2d44;
+    color: #ffffff;
+    padding: 22px;
+    border-radius: 10px;
 }
 
-.certificate-name {
-    font-size: 29px;
+.report-title h1 {
+    margin: 0;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.summary-item {
+    background: #f0f7fb;
+    border: 1px solid #d6e6ef;
+    border-radius: 8px;
+    padding: 13px;
+    text-align: center;
+}
+
+.summary-value {
+    display: block;
+    color: #0f2d44;
+    font-size: 21px;
     font-weight: bold;
-    margin: 22px 0;
+}
+
+.report-problem {
+    border: 2px solid #d6e6ef;
+    border-radius: 10px;
+    padding: 18px;
+    margin-top: 20px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.report-problem h2 {
+    margin-top: 0;
+}
+
+.report-math {
+    font-size: 24px;
+    text-align: center;
+    margin: 14px 0;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.report-table th,
+.report-table td {
+    padding: 9px;
+    border: 1px solid #d6e6ef;
+    text-align: left;
+    vertical-align: top;
+}
+
+.report-table th {
+    width: 30%;
+    background: #f0f7fb;
+    color: #0f2d44;
+}
+
+.work-image {
+    display: block;
+    max-width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    margin: 14px auto 0;
+    border: 1px solid #9aabb5;
+    background: white;
 }
 
 .verification-code {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #f6f9fb;
+    border-radius: 6px;
     font-family: monospace;
     font-size: 17px;
-    background: #f6f9fb;
-    padding: 8px 12px;
-    border-radius: 6px;
-    display: inline-block;
+}
+
+.print-area {
+    text-align: center;
+    margin: 22px 0;
 }
 
 .hidden {
     display: none !important;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 880px) {
+
     .workspace-layout {
         grid-template-columns: 1fr;
     }
@@ -361,19 +466,24 @@ input[type="range"] {
     .whiteboard-panel {
         position: static;
     }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-@media (max-width: 500px) {
-    .outside-answer {
-        width: 85px;
+@media (max-width: 520px) {
+
+    .summary-grid {
+        grid-template-columns: 1fr;
     }
 
-    .inside-answer {
+    .outside-answer {
         width: 90px;
     }
 
-    .answer-root-symbol {
-        font-size: 52px;
+    .inside-answer {
+        width: 95px;
     }
 
     .answer-labels {
@@ -381,32 +491,43 @@ input[type="range"] {
     }
 }
 
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
 @media print {
+
+    @page {
+        margin: 0.45in;
+    }
+
     body {
-        background: white;
-        padding: 0;
-    }
-
-    body * {
-        visibility: hidden;
-    }
-
-    #certificate,
-    #certificate * {
-        visibility: visible;
-    }
-
-    #certificate {
-        display: block !important;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
         margin: 0;
+        padding: 0;
+        background: #ffffff;
+        font-size: 11pt;
     }
 
     .no-print {
         display: none !important;
+    }
+
+    #masteryReport {
+        display: block !important;
+        margin: 0;
+    }
+
+    .report-title {
+        border-radius: 0;
+    }
+
+    .report-problem {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .work-image {
+        max-height: 360px;
     }
 }
 </style>
@@ -416,12 +537,19 @@ input[type="range"] {
 
 <div class="container">
 
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
     <header class="hero no-print">
         <h1>Radical Expressions Prove It!</h1>
         <p>Algebra 1B | Unit 1 | Week 1</p>
     </header>
 
-    <!-- START SCREEN -->
+
+    <!-- =================================================
+         START SCREEN
+    ================================================== -->
 
     <section id="startScreen" class="card blue-card no-print">
 
@@ -432,33 +560,40 @@ input[type="range"] {
             Each problem must be correct before the next challenge unlocks.
         </p>
 
-        <div class="yellow-card card">
+        <div class="card yellow-card">
+
             <strong>Showing all work is mandatory.</strong>
+
             <p style="margin-bottom: 0;">
-                You must use the digital whiteboard for each problem before the activity will check your final answer.
+                Your whiteboard work for every challenge will be saved
+                into your final Prove It Mastery Report.
             </p>
+
         </div>
 
         <p>
-            You may also use the
+            You may use the
             <a class="calculator"
                href="https://www.desmos.com/scientific"
                target="_blank"
                rel="noopener">
                 Desmos Scientific Calculator
             </a>
+            when needed.
         </p>
 
-        <p><strong>The calculator does not replace showing your work.</strong></p>
+        <p><strong>Calculator use does not replace showing your work.</strong></p>
 
         <label for="studentName">First and Last Name</label>
+
         <input id="studentName"
                class="name-input"
                type="text"
                autocomplete="name">
 
         <p>
-            <button id="beginButton" class="primary-button">
+            <button id="beginButton"
+                    class="primary-button">
                 Begin Prove It!
             </button>
         </p>
@@ -466,9 +601,12 @@ input[type="range"] {
     </section>
 
 
-    <!-- ACTIVITY -->
+    <!-- =================================================
+         ACTIVITY
+    ================================================== -->
 
-    <div id="activity" class="hidden no-print">
+    <div id="activity"
+         class="hidden no-print">
 
         <div class="progress-wrap">
 
@@ -477,7 +615,8 @@ input[type="range"] {
             </p>
 
             <div class="progress-bar">
-                <div id="progressFill" class="progress-fill"></div>
+                <div id="progressFill"
+                     class="progress-fill"></div>
             </div>
 
         </div>
@@ -485,17 +624,23 @@ input[type="range"] {
 
         <div class="workspace-layout">
 
+            <!-- =========================================
+                 CHALLENGES
+            ========================================== -->
+
             <main>
 
                 <!-- CHALLENGE 1 -->
 
-                <section id="challenge1" class="card challenge active">
+                <section id="challenge1"
+                         class="card challenge active">
 
-                    <h2>Challenge 1 — Simplify a Numerical Radical</h2>
+                    <h2>Challenge 1 — Numerical Radical</h2>
 
-                    <p>Simplify the expression completely.</p>
+                    <p>Simplify the radical completely.</p>
 
-                    <div id="problem1" class="problem-display"></div>
+                    <div id="problem1"
+                         class="problem-display"></div>
 
                     <div class="answer-heading">
                         Enter your final simplified answer:
@@ -506,16 +651,18 @@ input[type="range"] {
                         <input id="c1Outside"
                                class="outside-answer"
                                type="text"
-                               aria-label="Factor outside the radical">
+                               aria-label="Expression outside the radical">
 
                         <span class="answer-root-symbol">&radic;</span>
 
-                        <span class="inside-wrap">
+                        <span class="answer-radicand">
+
                             <input id="c1Inside"
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
+
                         </span>
 
                     </div>
@@ -541,7 +688,8 @@ input[type="range"] {
 
                 <!-- CHALLENGE 2 -->
 
-                <section id="challenge2" class="card challenge">
+                <section id="challenge2"
+                         class="card challenge">
 
                     <h2>Challenge 2 — Radical With a Variable</h2>
 
@@ -550,7 +698,8 @@ input[type="range"] {
                         Simplify completely.
                     </p>
 
-                    <div id="problem2" class="problem-display"></div>
+                    <div id="problem2"
+                         class="problem-display"></div>
 
                     <div class="answer-heading">
                         Enter your final simplified answer:
@@ -566,12 +715,14 @@ input[type="range"] {
 
                         <span class="answer-root-symbol">&radic;</span>
 
-                        <span class="inside-wrap">
+                        <span class="answer-radicand">
+
                             <input id="c2Inside"
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
+
                         </span>
 
                     </div>
@@ -597,17 +748,22 @@ input[type="range"] {
 
                 <!-- CHALLENGE 3 -->
 
-                <section id="challenge3" class="card challenge">
+                <section id="challenge3"
+                         class="card challenge">
 
                     <h2>Challenge 3 — Radical Involving a Fraction</h2>
 
-                    <p>Simplify completely.</p>
+                    <p>
+                        Simplify completely.
+                        <strong>The entire fraction is under the square root.</strong>
+                    </p>
 
-                    <div id="problem3" class="problem-display"></div>
+                    <div id="problem3"
+                         class="problem-display"></div>
 
                     <p>
-                        For the outside value, you may enter a fraction such as
-                        <strong>3/2</strong>.
+                        You may enter a fraction outside the radical,
+                        such as <strong>3/2</strong>.
                     </p>
 
                     <div class="answer-heading">
@@ -620,16 +776,18 @@ input[type="range"] {
                                class="outside-answer"
                                type="text"
                                placeholder="example: 3/2"
-                               aria-label="Factor outside the radical">
+                               aria-label="Expression outside the radical">
 
                         <span class="answer-root-symbol">&radic;</span>
 
-                        <span class="inside-wrap">
+                        <span class="answer-radicand">
+
                             <input id="c3Inside"
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
+
                         </span>
 
                     </div>
@@ -655,7 +813,8 @@ input[type="range"] {
 
                 <!-- CHALLENGE 4 -->
 
-                <section id="challenge4" class="card challenge">
+                <section id="challenge4"
+                         class="card challenge">
 
                     <h2>Challenge 4 — Mixed Radical Review</h2>
 
@@ -664,12 +823,12 @@ input[type="range"] {
                         Simplify completely.
                     </p>
 
-                    <div id="problem4" class="problem-display"></div>
+                    <div id="problem4"
+                         class="problem-display"></div>
 
                     <p>
                         Enter the complete expression outside the radical.
-                        For example, an outside expression might look like
-                        <strong>3x²</strong>.
+                        Example: <strong>3x^2</strong>
                     </p>
 
                     <div class="answer-heading">
@@ -686,12 +845,14 @@ input[type="range"] {
 
                         <span class="answer-root-symbol">&radic;</span>
 
-                        <span class="inside-wrap">
+                        <span class="answer-radicand">
+
                             <input id="c4Inside"
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
+
                         </span>
 
                     </div>
@@ -717,7 +878,9 @@ input[type="range"] {
             </main>
 
 
-            <!-- WHITEBOARD -->
+            <!-- =========================================
+                 WHITEBOARD
+            ========================================== -->
 
             <aside class="card whiteboard-panel">
 
@@ -732,8 +895,8 @@ input[type="range"] {
                 </p>
 
                 <canvas id="whiteboard"
-                        width="700"
-                        height="700"
+                        width="760"
+                        height="760"
                         aria-label="Digital whiteboard for showing mathematical work">
                 </canvas>
 
@@ -769,21 +932,23 @@ input[type="range"] {
                        max="15"
                        value="4">
 
-                <div class="yellow-card card">
-                    <strong>Important:</strong>
+                <div class="card yellow-card">
+                    <strong>Remember:</strong>
                     <p style="margin-bottom: 0;">
-                        The activity checks that you used the whiteboard before submitting.
-                        Your teacher may review your work for completeness.
+                        Your whiteboard will be saved with this problem
+                        and included in your final PDF.
                     </p>
                 </div>
 
                 <p style="text-align: center;">
+
                     <a class="calculator"
                        href="https://www.desmos.com/scientific"
                        target="_blank"
                        rel="noopener">
                         Open Desmos Scientific Calculator
                     </a>
+
                 </p>
 
             </aside>
@@ -793,46 +958,234 @@ input[type="range"] {
     </div>
 
 
-    <!-- CERTIFICATE -->
+    <!-- =================================================
+         FINAL MASTERY REPORT
+    ================================================== -->
 
-    <section id="certificate" class="certificate">
+    <section id="masteryReport">
 
-        <h2>Certificate of Mastery</h2>
+        <div class="report-title">
+            <h1>Prove It Mastery Report</h1>
+            <p style="margin: 6px 0 0;">
+                Algebra 1B | Unit 1 | Radical Expressions
+            </p>
+        </div>
 
-        <p>Algebra 1B | Unit 1 | Week 1</p>
+        <div class="summary-grid">
 
-        <p>Radical Expressions Prove It!</p>
+            <div class="summary-item">
+                <span class="summary-value"
+                      id="reportStudent"></span>
+                Student
+            </div>
 
-        <p>This certifies that</p>
+            <div class="summary-item">
+                <span class="summary-value"
+                      id="reportTime"></span>
+                Time Taken
+            </div>
 
-        <div id="certificateName"
-             class="certificate-name"></div>
+            <div class="summary-item">
+                <span class="summary-value"
+                      id="reportChecks"></span>
+                Answer Checks
+            </div>
 
-        <p>successfully mastered</p>
+            <div class="summary-item">
+                <span class="summary-value">
+                    4 / 4
+                </span>
+                Challenges Mastered
+            </div>
 
-        <p style="font-size: 24px;">
-            <strong>4 of 4 Radical Expression Challenges</strong>
-        </p>
+        </div>
 
-        <p>
-            All four challenges were solved correctly with
-            whiteboard work recorded before submission.
-        </p>
 
-        <p id="certificateDate"></p>
+        <!-- PROBLEM 1 REPORT -->
 
-        <p>
-            Verification Code:
-            <span id="verificationCode"
-                  class="verification-code"></span>
-        </p>
+        <div class="report-problem">
 
-        <p class="no-print">
+            <h2>Challenge 1 — Numerical Radical</h2>
+
+            <div id="reportProblem1"
+                 class="report-math"></div>
+
+            <table class="report-table">
+
+                <tr>
+                    <th>Student Final Answer</th>
+                    <td id="reportStudentAnswer1"></td>
+                </tr>
+
+                <tr>
+                    <th>Correct Solution</th>
+                    <td id="reportSolution1"></td>
+                </tr>
+
+                <tr>
+                    <th>Answer Checks Used</th>
+                    <td id="reportChecks1"></td>
+                </tr>
+
+            </table>
+
+            <h3>Student Whiteboard Work</h3>
+
+            <img id="reportWork1"
+                 class="work-image"
+                 alt="Student whiteboard work for Challenge 1">
+
+        </div>
+
+
+        <!-- PROBLEM 2 REPORT -->
+
+        <div class="report-problem">
+
+            <h2>Challenge 2 — Radical With a Variable</h2>
+
+            <div id="reportProblem2"
+                 class="report-math"></div>
+
+            <table class="report-table">
+
+                <tr>
+                    <th>Student Final Answer</th>
+                    <td id="reportStudentAnswer2"></td>
+                </tr>
+
+                <tr>
+                    <th>Correct Solution</th>
+                    <td id="reportSolution2"></td>
+                </tr>
+
+                <tr>
+                    <th>Answer Checks Used</th>
+                    <td id="reportChecks2"></td>
+                </tr>
+
+            </table>
+
+            <h3>Student Whiteboard Work</h3>
+
+            <img id="reportWork2"
+                 class="work-image"
+                 alt="Student whiteboard work for Challenge 2">
+
+        </div>
+
+
+        <!-- PROBLEM 3 REPORT -->
+
+        <div class="report-problem">
+
+            <h2>Challenge 3 — Radical Involving a Fraction</h2>
+
+            <div id="reportProblem3"
+                 class="report-math"></div>
+
+            <table class="report-table">
+
+                <tr>
+                    <th>Student Final Answer</th>
+                    <td id="reportStudentAnswer3"></td>
+                </tr>
+
+                <tr>
+                    <th>Correct Solution</th>
+                    <td id="reportSolution3"></td>
+                </tr>
+
+                <tr>
+                    <th>Answer Checks Used</th>
+                    <td id="reportChecks3"></td>
+                </tr>
+
+            </table>
+
+            <h3>Student Whiteboard Work</h3>
+
+            <img id="reportWork3"
+                 class="work-image"
+                 alt="Student whiteboard work for Challenge 3">
+
+        </div>
+
+
+        <!-- PROBLEM 4 REPORT -->
+
+        <div class="report-problem">
+
+            <h2>Challenge 4 — Mixed Radical Review</h2>
+
+            <div id="reportProblem4"
+                 class="report-math"></div>
+
+            <table class="report-table">
+
+                <tr>
+                    <th>Student Final Answer</th>
+                    <td id="reportStudentAnswer4"></td>
+                </tr>
+
+                <tr>
+                    <th>Correct Solution</th>
+                    <td id="reportSolution4"></td>
+                </tr>
+
+                <tr>
+                    <th>Answer Checks Used</th>
+                    <td id="reportChecks4"></td>
+                </tr>
+
+            </table>
+
+            <h3>Student Whiteboard Work</h3>
+
+            <img id="reportWork4"
+                 class="work-image"
+                 alt="Student whiteboard work for Challenge 4">
+
+        </div>
+
+
+        <div class="card green-card">
+
+            <h2 style="margin-top: 0;">Completion Record</h2>
+
+            <p>
+                <strong>Completed:</strong>
+                <span id="reportCompleted"></span>
+            </p>
+
+            <p>
+                <strong>Verification Code:</strong>
+                <span id="reportVerification"
+                      class="verification-code"></span>
+            </p>
+
+            <p style="margin-bottom: 0;">
+                All four challenges were answered correctly.
+                Whiteboard work was recorded for each challenge.
+            </p>
+
+        </div>
+
+
+        <div class="print-area no-print">
+
+            <p>
+                <strong>
+                    Save this entire report as a PDF and upload it to Canvas.
+                </strong>
+            </p>
+
             <button class="primary-button"
                     onclick="window.print()">
-                Print / Save as PDF
+                Print / Save Mastery Report as PDF
             </button>
-        </p>
+
+        </div>
 
     </section>
 
@@ -842,35 +1195,76 @@ input[type="range"] {
 <script>
 "use strict";
 
-/* ===================================================
-   PROBLEM DATA
-=================================================== */
+/* =====================================================
+   ACTIVITY DATA
+===================================================== */
 
-const squareFreeValues = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15];
+const squareFreeValues =
+    [2, 3, 5, 6, 7, 10, 11, 13, 14, 15];
 
 let problems = {};
+
 let mastered = 0;
 let activeChallenge = 1;
 
+let startTime = null;
+let endTime = null;
 
-/* ===================================================
+let totalChecks = 0;
+
+const challengeChecks = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0
+};
+
+const whiteboardImages = {
+    1: "",
+    2: "",
+    3: "",
+    4: ""
+};
+
+const studentAnswers = {
+    1: "",
+    2: "",
+    3: "",
+    4: ""
+};
+
+
+/* =====================================================
    GENERAL HELPERS
-=================================================== */
+===================================================== */
 
 function randomChoice(array) {
-    return array[Math.floor(Math.random() * array.length)];
+
+    return array[
+        Math.floor(
+            Math.random() *
+            array.length
+        )
+    ];
 }
 
 function randomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+
+    return Math.floor(
+        Math.random() *
+        (max - min + 1)
+    ) + min;
 }
 
 function gcd(a, b) {
+
     a = Math.abs(a);
     b = Math.abs(b);
 
     while (b !== 0) {
+
         const temp = b;
+
         b = a % b;
         a = temp;
     }
@@ -891,9 +1285,9 @@ function normalizeAnswer(value) {
 }
 
 
-/* ===================================================
+/* =====================================================
    MATH FORMATTING
-=================================================== */
+===================================================== */
 
 function radicalHTML(content) {
 
@@ -905,120 +1299,230 @@ function radicalHTML(content) {
     `;
 }
 
-function fractionHTML(top, bottom) {
+
+/*
+   IMPORTANT:
+
+   fractionUnderRadicalHTML places BOTH numerator
+   and denominator inside the .radicand element.
+
+   The border-top on .radicand therefore spans
+   the entire fraction.
+*/
+
+function fractionUnderRadicalHTML(
+    numerator,
+    denominator
+) {
+
+    const fraction = `
+        <span class="full-fraction">
+            <span class="fraction-numerator">
+                ${numerator}
+            </span>
+
+            <span class="fraction-denominator">
+                ${denominator}
+            </span>
+        </span>
+    `;
+
+    return radicalHTML(fraction);
+}
+
+
+function answerRadicalHTML(
+    outside,
+    inside
+) {
 
     return `
-        <span class="fraction">
-            <span class="fraction-top">${top}</span>
-            <span class="fraction-bottom">${bottom}</span>
-        </span>
+        ${outside}
+        ${radicalHTML(inside)}
     `;
 }
 
 
-/* ===================================================
-   GENERATE PROBLEMS
-=================================================== */
+/* =====================================================
+   PROBLEM GENERATION
+===================================================== */
 
 function generateProblems() {
 
-    /* Challenge 1:
-       √(a²b) = a√b
-    */
+    /* -----------------------------------------------
+       CHALLENGE 1
 
-    const a1 = randomInteger(2, 9);
-    const b1 = randomChoice(squareFreeValues);
+       √(a²b) = a√b
+    ------------------------------------------------ */
+
+    const a1 =
+        randomInteger(2, 9);
+
+    const b1 =
+        randomChoice(squareFreeValues);
 
     problems[1] = {
-        original: a1 * a1 * b1,
-        outside: String(a1),
-        inside: String(b1)
+
+        original:
+            a1 * a1 * b1,
+
+        outside:
+            String(a1),
+
+        inside:
+            String(b1)
     };
 
 
-    /* Challenge 2:
-       √(a²bx²) = ax√b, x ≥ 0
-    */
+    /* -----------------------------------------------
+       CHALLENGE 2
 
-    const a2 = randomInteger(2, 8);
-    const b2 = randomChoice(squareFreeValues);
+       √(a²bx²) = ax√b
+       x ≥ 0
+    ------------------------------------------------ */
+
+    const a2 =
+        randomInteger(2, 8);
+
+    const b2 =
+        randomChoice(squareFreeValues);
 
     problems[2] = {
-        original: a2 * a2 * b2,
-        outside: a2 + "x",
-        inside: String(b2)
+
+        original:
+            a2 * a2 * b2,
+
+        outside:
+            a2 + "x",
+
+        inside:
+            String(b2)
     };
 
 
-    /* Challenge 3:
-       √[(a²b)/(d²)] = (a/d)√b
-       gcd(a,d)=1
-    */
+    /* -----------------------------------------------
+       CHALLENGE 3
+
+             a²b
+       √  --------
+              d²
+
+       = (a/d)√b
+
+       Entire fraction under radical.
+    ------------------------------------------------ */
 
     let a3;
     let d3;
 
     do {
-        a3 = randomInteger(2, 8);
-        d3 = randomInteger(2, 8);
-    } while (gcd(a3, d3) !== 1);
 
-    const b3 = randomChoice(squareFreeValues);
+        a3 =
+            randomInteger(2, 8);
+
+        d3 =
+            randomInteger(2, 8);
+
+    } while (
+        gcd(a3, d3) !== 1
+    );
+
+    const b3 =
+        randomChoice(squareFreeValues);
 
     problems[3] = {
-        numerator: a3 * a3 * b3,
-        denominator: d3 * d3,
-        outside: a3 + "/" + d3,
-        inside: String(b3)
+
+        numerator:
+            a3 * a3 * b3,
+
+        denominator:
+            d3 * d3,
+
+        outside:
+            a3 + "/" + d3,
+
+        inside:
+            String(b3)
     };
 
 
-    /* Challenge 4:
-       √(a²b x^(2n)) = ax^n√b
-    */
+    /* -----------------------------------------------
+       CHALLENGE 4
 
-    const a4 = randomInteger(2, 7);
-    const b4 = randomChoice(squareFreeValues);
-    const n4 = randomInteger(2, 4);
+       √(a²b x^(2n))
+       = ax^n√b
+    ------------------------------------------------ */
+
+    const a4 =
+        randomInteger(2, 7);
+
+    const b4 =
+        randomChoice(squareFreeValues);
+
+    const n4 =
+        randomInteger(2, 4);
 
     problems[4] = {
-        original: a4 * a4 * b4,
-        insideExponent: 2 * n4,
-        outside: a4 + "x^" + n4,
-        inside: String(b4)
+
+        original:
+            a4 * a4 * b4,
+
+        insideExponent:
+            2 * n4,
+
+        outside:
+            a4 + "x^" + n4,
+
+        inside:
+            String(b4)
     };
+
 
     renderProblems();
 }
 
 
-/* ===================================================
-   RENDER PROBLEMS
-=================================================== */
+/* =====================================================
+   PROBLEM DISPLAY
+===================================================== */
 
 function renderProblems() {
 
-    document.getElementById("problem1").innerHTML =
-        radicalHTML(problems[1].original);
+    document.getElementById(
+        "problem1"
+    ).innerHTML =
+        radicalHTML(
+            problems[1].original
+        );
 
 
-    document.getElementById("problem2").innerHTML =
+    document.getElementById(
+        "problem2"
+    ).innerHTML =
         radicalHTML(
             problems[2].original +
             "x<sup>2</sup>"
         );
 
 
-    document.getElementById("problem3").innerHTML =
-        radicalHTML(
-            fractionHTML(
-                problems[3].numerator,
-                problems[3].denominator
-            )
+    /*
+       FIXED CHALLENGE 3:
+
+       The ENTIRE fraction is inside the radical.
+    */
+
+    document.getElementById(
+        "problem3"
+    ).innerHTML =
+        fractionUnderRadicalHTML(
+            problems[3].numerator,
+            problems[3].denominator
         );
 
 
-    document.getElementById("problem4").innerHTML =
+    document.getElementById(
+        "problem4"
+    ).innerHTML =
         radicalHTML(
             problems[4].original +
             "x<sup>" +
@@ -1028,51 +1532,48 @@ function renderProblems() {
 }
 
 
-/* ===================================================
+/* =====================================================
    FEEDBACK
-=================================================== */
+===================================================== */
 
-function setFeedback(number, correct, message) {
+function setFeedback(
+    number,
+    correct,
+    message
+) {
 
     const feedback =
-        document.getElementById("feedback" + number);
+        document.getElementById(
+            "feedback" + number
+        );
 
     feedback.className =
         "feedback " +
-        (correct ? "correct" : "incorrect");
+        (
+            correct
+                ? "correct"
+                : "incorrect"
+        );
 
-    feedback.textContent = message;
+    feedback.textContent =
+        message;
 }
 
 
-/* ===================================================
-   REQUIRED WHITEBOARD WORK
-=================================================== */
-
-let strokes = [];
-let currentStroke = [];
-let drawing = false;
-let tool = "pen";
-
-function hasRequiredWork() {
-
-    /*
-       This intentionally checks only that the whiteboard
-       was actually used.
-
-       Mathematical quality of work is still reviewed
-       by the teacher.
-    */
-
-    return strokes.length >= 2;
-}
-
-
-/* ===================================================
+/* =====================================================
    CHECK ANSWERS
-=================================================== */
+===================================================== */
 
 function checkChallenge(number) {
+
+    totalChecks++;
+    challengeChecks[number]++;
+
+
+    /*
+       Require actual whiteboard use
+       before allowing a check.
+    */
 
     if (!hasRequiredWork()) {
 
@@ -1085,19 +1586,28 @@ function checkChallenge(number) {
         return;
     }
 
+
+    const outsideRaw =
+        document.getElementById(
+            "c" + number + "Outside"
+        ).value;
+
+    const insideRaw =
+        document.getElementById(
+            "c" + number + "Inside"
+        ).value;
+
+
     const outside =
         normalizeAnswer(
-            document.getElementById(
-                "c" + number + "Outside"
-            ).value
+            outsideRaw
         );
 
     const inside =
         normalizeAnswer(
-            document.getElementById(
-                "c" + number + "Inside"
-            ).value
+            insideRaw
         );
+
 
     const expectedOutside =
         normalizeAnswer(
@@ -1109,10 +1619,30 @@ function checkChallenge(number) {
             problems[number].inside
         );
 
+
     if (
         outside === expectedOutside &&
         inside === expectedInside
     ) {
+
+        /*
+           Save student final answer.
+        */
+
+        studentAnswers[number] =
+            outsideRaw.trim() +
+            "√" +
+            insideRaw.trim();
+
+
+        /*
+           IMPORTANT:
+           Capture whiteboard BEFORE clearing it.
+        */
+
+        whiteboardImages[number] =
+            captureWhiteboard();
+
 
         setFeedback(
             number,
@@ -1120,24 +1650,32 @@ function checkChallenge(number) {
             "Correct! Your simplified radical is correct."
         );
 
-        setTimeout(function () {
-            advanceChallenge(number);
-        }, 700);
+
+        setTimeout(
+            function () {
+
+                advanceChallenge(
+                    number
+                );
+
+            },
+            600
+        );
 
     } else {
 
         setFeedback(
             number,
             false,
-            "Not quite. Check your factor outside the radical and the value remaining under the radical. Use your whiteboard to revise your work."
+            "Not quite. Check both the expression outside the radical and the value remaining under the radical."
         );
     }
 }
 
 
-/* ===================================================
-   ADVANCE
-=================================================== */
+/* =====================================================
+   PROGRESS
+===================================================== */
 
 function advanceChallenge(number) {
 
@@ -1145,21 +1683,27 @@ function advanceChallenge(number) {
 
     updateProgress();
 
-    document
-        .getElementById("challenge" + number)
-        .classList
-        .remove("active");
+
+    document.getElementById(
+        "challenge" + number
+    ).classList.remove(
+        "active"
+    );
+
 
     if (number < 4) {
 
-        activeChallenge = number + 1;
+        activeChallenge =
+            number + 1;
 
-        document
-            .getElementById(
-                "challenge" + activeChallenge
-            )
-            .classList
-            .add("active");
+
+        document.getElementById(
+            "challenge" +
+            activeChallenge
+        ).classList.add(
+            "active"
+        );
+
 
         document.getElementById(
             "whiteboardPrompt"
@@ -1168,28 +1712,28 @@ function advanceChallenge(number) {
             activeChallenge +
             " below.";
 
+
         /*
-           Clear whiteboard between problems.
-           This ensures that each problem has
-           its own required work.
+           Clear only AFTER saved image exists.
         */
 
         clearBoard();
 
-        document
-            .getElementById(
-                "challenge" + activeChallenge
-            )
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+
+        document.getElementById(
+            "challenge" +
+            activeChallenge
+        ).scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
     } else {
 
         finishActivity();
     }
 }
+
 
 function updateProgress() {
 
@@ -1200,135 +1744,54 @@ function updateProgress() {
         mastered +
         " of 4 mastered";
 
+
     document.getElementById(
         "progressFill"
     ).style.width =
-        (mastered / 4 * 100) + "%";
+        (
+            mastered /
+            4 *
+            100
+        ) +
+        "%";
 }
 
 
-/* ===================================================
-   CERTIFICATE
-=================================================== */
+/* =====================================================
+   WHITEBOARD
+===================================================== */
 
-function verificationCode() {
-
-    const chars =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-    let code = "RAD-";
-
-    for (let i = 0; i < 8; i++) {
-        code += chars.charAt(
-            Math.floor(
-                Math.random() *
-                chars.length
-            )
-        );
-    }
-
-    return code;
-}
-
-function finishActivity() {
-
-    document
-        .getElementById("activity")
-        .classList
-        .add("hidden");
-
-    const studentName =
-        document
-        .getElementById("studentName")
-        .value
-        .trim();
-
+const canvas =
     document.getElementById(
-        "certificateName"
-    ).textContent =
-        studentName;
+        "whiteboard"
+    );
 
-    document.getElementById(
-        "certificateDate"
-    ).textContent =
-        "Completed: " +
-        new Date().toLocaleDateString();
-
-    document.getElementById(
-        "verificationCode"
-    ).textContent =
-        verificationCode();
-
-    const certificate =
-        document.getElementById(
-            "certificate"
-        );
-
-    certificate.style.display =
-        "block";
-
-    certificate.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-
-
-/* ===================================================
-   START ACTIVITY
-=================================================== */
-
-document
-    .getElementById("beginButton")
-    .addEventListener(
-        "click",
-        function () {
-
-            const name =
-                document
-                .getElementById(
-                    "studentName"
-                )
-                .value
-                .trim();
-
-            if (name.length < 3) {
-
-                alert(
-                    "Please enter your first and last name before beginning."
-                );
-
-                return;
-            }
-
-            document
-                .getElementById(
-                    "startScreen"
-                )
-                .classList
-                .add("hidden");
-
-            document
-                .getElementById(
-                    "activity"
-                )
-                .classList
-                .remove("hidden");
-
-            generateProblems();
-        }
+const ctx =
+    canvas.getContext(
+        "2d"
     );
 
 
-/* ===================================================
-   WHITEBOARD
-=================================================== */
+let drawing = false;
+let tool = "pen";
 
-const canvas =
-    document.getElementById("whiteboard");
+let strokes = [];
+let currentStroke = [];
 
-const ctx =
-    canvas.getContext("2d");
+
+function prepareCanvas() {
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+}
+
 
 function canvasPoint(event) {
 
@@ -1340,16 +1803,31 @@ function canvasPoint(event) {
             ? event.touches[0]
             : event;
 
+
     return {
+
         x:
-            (source.clientX - rect.left) *
-            (canvas.width / rect.width),
+            (
+                source.clientX -
+                rect.left
+            ) *
+            (
+                canvas.width /
+                rect.width
+            ),
 
         y:
-            (source.clientY - rect.top) *
-            (canvas.height / rect.height)
+            (
+                source.clientY -
+                rect.top
+            ) *
+            (
+                canvas.height /
+                rect.height
+            )
     };
 }
+
 
 function startDrawing(event) {
 
@@ -1360,20 +1838,20 @@ function startDrawing(event) {
     const point =
         canvasPoint(event);
 
+
     currentStroke = [{
         x: point.x,
         y: point.y,
         tool: tool,
         width:
             Number(
-                document
-                .getElementById(
+                document.getElementById(
                     "lineWidth"
-                )
-                .value
+                ).value
             )
     }];
 }
+
 
 function draw(event) {
 
@@ -1383,32 +1861,44 @@ function draw(event) {
 
     event.preventDefault();
 
+
     const point =
         canvasPoint(event);
+
 
     const last =
         currentStroke[
             currentStroke.length - 1
         ];
 
+
     const data = {
+
         x: point.x,
         y: point.y,
+
         tool: tool,
+
         width:
             Number(
-                document
-                .getElementById(
+                document.getElementById(
                     "lineWidth"
-                )
-                .value
+                ).value
             )
     };
 
-    drawSegment(last, data);
 
-    currentStroke.push(data);
+    drawSegment(
+        last,
+        data
+    );
+
+
+    currentStroke.push(
+        data
+    );
 }
+
 
 function stopDrawing() {
 
@@ -1418,14 +1908,26 @@ function stopDrawing() {
 
     drawing = false;
 
-    if (currentStroke.length > 1) {
-        strokes.push(currentStroke);
+
+    if (
+        currentStroke.length >
+        1
+    ) {
+
+        strokes.push(
+            currentStroke
+        );
     }
+
 
     currentStroke = [];
 }
 
-function drawSegment(a, b) {
+
+function drawSegment(
+    a,
+    b
+) {
 
     ctx.beginPath();
 
@@ -1439,21 +1941,61 @@ function drawSegment(a, b) {
         b.y
     );
 
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.lineWidth = b.width;
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.lineWidth =
+        b.width;
 
     ctx.strokeStyle =
-        b.tool === "eraser"
+        b.tool ===
+        "eraser"
             ? "#ffffff"
             : "#1f2933";
 
     ctx.stroke();
 }
 
-function setTool(newTool) {
-    tool = newTool;
+
+function setTool(
+    newTool
+) {
+
+    tool =
+        newTool;
 }
+
+
+function hasRequiredWork() {
+
+    /*
+       More than a single accidental line.
+    */
+
+    return (
+        strokes.length >= 2
+    );
+}
+
+
+function captureWhiteboard() {
+
+    /*
+       Canvas has a white background because
+       prepareCanvas() and redrawBoard()
+       paint it white.
+
+       This makes the image clear in the PDF.
+    */
+
+    return canvas.toDataURL(
+        "image/png"
+    );
+}
+
 
 function undoStroke() {
 
@@ -1462,37 +2004,51 @@ function undoStroke() {
     redrawBoard();
 }
 
+
 function redrawBoard() {
 
-    ctx.clearRect(
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.fillRect(
         0,
         0,
         canvas.width,
         canvas.height
     );
 
-    strokes.forEach(function (stroke) {
 
-        for (
-            let i = 1;
-            i < stroke.length;
-            i++
-        ) {
+    strokes.forEach(
+        function (stroke) {
 
-            drawSegment(
-                stroke[i - 1],
-                stroke[i]
-            );
+            for (
+                let i = 1;
+                i <
+                stroke.length;
+                i++
+            ) {
+
+                drawSegment(
+                    stroke[
+                        i - 1
+                    ],
+                    stroke[i]
+                );
+            }
         }
-    });
+    );
 }
+
 
 function clearBoard() {
 
     strokes = [];
     currentStroke = [];
 
-    ctx.clearRect(
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.fillRect(
         0,
         0,
         canvas.width,
@@ -1524,18 +2080,426 @@ window.addEventListener(
 canvas.addEventListener(
     "touchstart",
     startDrawing,
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 canvas.addEventListener(
     "touchmove",
     draw,
-    { passive: false }
+    {
+        passive: false
+    }
 );
 
 canvas.addEventListener(
     "touchend",
     stopDrawing
+);
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function formatElapsed(
+    milliseconds
+) {
+
+    const totalSeconds =
+        Math.floor(
+            milliseconds /
+            1000
+        );
+
+    const minutes =
+        Math.floor(
+            totalSeconds /
+            60
+        );
+
+    const seconds =
+        totalSeconds %
+        60;
+
+
+    return (
+        minutes +
+        " min " +
+        seconds +
+        " sec"
+    );
+}
+
+
+/* =====================================================
+   VERIFICATION CODE
+===================================================== */
+
+function createVerificationCode() {
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code =
+        "RAD-";
+
+
+    for (
+        let i = 0;
+        i < 8;
+        i++
+    ) {
+
+        code +=
+            chars.charAt(
+                Math.floor(
+                    Math.random() *
+                    chars.length
+                )
+            );
+    }
+
+
+    return code;
+}
+
+
+/* =====================================================
+   BUILD FINAL REPORT
+===================================================== */
+
+function finishActivity() {
+
+    endTime =
+        Date.now();
+
+
+    document.getElementById(
+        "activity"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    buildMasteryReport();
+
+
+    const report =
+        document.getElementById(
+            "masteryReport"
+        );
+
+    report.style.display =
+        "block";
+
+
+    report.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+function buildMasteryReport() {
+
+    const name =
+        document.getElementById(
+            "studentName"
+        ).value.trim();
+
+
+    const elapsed =
+        formatElapsed(
+            endTime -
+            startTime
+        );
+
+
+    document.getElementById(
+        "reportStudent"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "reportTime"
+    ).textContent =
+        elapsed;
+
+
+    document.getElementById(
+        "reportChecks"
+    ).textContent =
+        totalChecks;
+
+
+    /* -----------------------------------------------
+       PROBLEM 1
+    ------------------------------------------------ */
+
+    document.getElementById(
+        "reportProblem1"
+    ).innerHTML =
+        radicalHTML(
+            problems[1].original
+        );
+
+
+    document.getElementById(
+        "reportStudentAnswer1"
+    ).innerHTML =
+        answerRadicalHTML(
+            problems[1].outside,
+            problems[1].inside
+        );
+
+
+    document.getElementById(
+        "reportSolution1"
+    ).innerHTML =
+        radicalHTML(
+            problems[1].original
+        ) +
+        " = " +
+        answerRadicalHTML(
+            problems[1].outside,
+            problems[1].inside
+        );
+
+
+    document.getElementById(
+        "reportChecks1"
+    ).textContent =
+        challengeChecks[1];
+
+
+    document.getElementById(
+        "reportWork1"
+    ).src =
+        whiteboardImages[1];
+
+
+    /* -----------------------------------------------
+       PROBLEM 2
+    ------------------------------------------------ */
+
+    document.getElementById(
+        "reportProblem2"
+    ).innerHTML =
+        radicalHTML(
+            problems[2].original +
+            "x<sup>2</sup>"
+        );
+
+
+    document.getElementById(
+        "reportStudentAnswer2"
+    ).innerHTML =
+        answerRadicalHTML(
+            problems[2].outside,
+            problems[2].inside
+        );
+
+
+    document.getElementById(
+        "reportSolution2"
+    ).innerHTML =
+        radicalHTML(
+            problems[2].original +
+            "x<sup>2</sup>"
+        ) +
+        " = " +
+        answerRadicalHTML(
+            problems[2].outside,
+            problems[2].inside
+        );
+
+
+    document.getElementById(
+        "reportChecks2"
+    ).textContent =
+        challengeChecks[2];
+
+
+    document.getElementById(
+        "reportWork2"
+    ).src =
+        whiteboardImages[2];
+
+
+    /* -----------------------------------------------
+       PROBLEM 3
+    ------------------------------------------------ */
+
+    const problem3HTML =
+        fractionUnderRadicalHTML(
+            problems[3].numerator,
+            problems[3].denominator
+        );
+
+
+    document.getElementById(
+        "reportProblem3"
+    ).innerHTML =
+        problem3HTML;
+
+
+    document.getElementById(
+        "reportStudentAnswer3"
+    ).innerHTML =
+        answerRadicalHTML(
+            problems[3].outside,
+            problems[3].inside
+        );
+
+
+    document.getElementById(
+        "reportSolution3"
+    ).innerHTML =
+        problem3HTML +
+        " = " +
+        answerRadicalHTML(
+            problems[3].outside,
+            problems[3].inside
+        );
+
+
+    document.getElementById(
+        "reportChecks3"
+    ).textContent =
+        challengeChecks[3];
+
+
+    document.getElementById(
+        "reportWork3"
+    ).src =
+        whiteboardImages[3];
+
+
+    /* -----------------------------------------------
+       PROBLEM 4
+    ------------------------------------------------ */
+
+    document.getElementById(
+        "reportProblem4"
+    ).innerHTML =
+        radicalHTML(
+            problems[4].original +
+            "x<sup>" +
+            problems[4].insideExponent +
+            "</sup>"
+        );
+
+
+    document.getElementById(
+        "reportStudentAnswer4"
+    ).innerHTML =
+        answerRadicalHTML(
+            problems[4].outside,
+            problems[4].inside
+        );
+
+
+    document.getElementById(
+        "reportSolution4"
+    ).innerHTML =
+        radicalHTML(
+            problems[4].original +
+            "x<sup>" +
+            problems[4].insideExponent +
+            "</sup>"
+        ) +
+        " = " +
+        answerRadicalHTML(
+            problems[4].outside,
+            problems[4].inside
+        );
+
+
+    document.getElementById(
+        "reportChecks4"
+    ).textContent =
+        challengeChecks[4];
+
+
+    document.getElementById(
+        "reportWork4"
+    ).src =
+        whiteboardImages[4];
+
+
+    /* -----------------------------------------------
+       COMPLETION DATA
+    ------------------------------------------------ */
+
+    document.getElementById(
+        "reportCompleted"
+    ).textContent =
+        new Date(
+            endTime
+        ).toLocaleString();
+
+
+    document.getElementById(
+        "reportVerification"
+    ).textContent =
+        createVerificationCode();
+}
+
+
+/* =====================================================
+   BEGIN ACTIVITY
+===================================================== */
+
+document.getElementById(
+    "beginButton"
+).addEventListener(
+    "click",
+    function () {
+
+        const name =
+            document.getElementById(
+                "studentName"
+            ).value.trim();
+
+
+        if (
+            name.length <
+            3
+        ) {
+
+            alert(
+                "Please enter your first and last name before beginning."
+            );
+
+            return;
+        }
+
+
+        startTime =
+            Date.now();
+
+
+        document.getElementById(
+            "startScreen"
+        ).classList.add(
+            "hidden"
+        );
+
+
+        document.getElementById(
+            "activity"
+        ).classList.remove(
+            "hidden"
+        );
+
+
+        prepareCanvas();
+
+        generateProblems();
+    }
 );
 </script>
 
