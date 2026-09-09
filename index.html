@@ -8,7 +8,7 @@
 
 <style>
 /* =========================================================
-   GENERAL
+   BASE
 ========================================================= */
 
 * {
@@ -68,13 +68,19 @@ body {
     border-left: 6px solid #f2b705;
 }
 
+.gray-card {
+    background: #f6f9fb;
+    border-left: 6px solid #d6e6ef;
+}
+
 h2,
 h3 {
     color: #0f2d44;
 }
 
 button,
-input {
+input,
+textarea {
     font-family: Arial, sans-serif;
 }
 
@@ -101,7 +107,8 @@ input {
 button:hover,
 button:focus,
 a:focus,
-input:focus {
+input:focus,
+textarea:focus {
     outline: 3px solid #b7d7e8;
     outline-offset: 2px;
 }
@@ -121,14 +128,30 @@ label {
     margin-top: 14px;
 }
 
-.name-input {
-    display: block;
+input[type="text"],
+textarea {
     width: 100%;
-    max-width: 500px;
     padding: 10px;
     border: 1px solid #9aabb5;
     border-radius: 6px;
     font-size: 16px;
+}
+
+textarea {
+    min-height: 72px;
+    resize: vertical;
+}
+
+.short-input {
+    max-width: 150px;
+}
+
+.medium-input {
+    max-width: 240px;
+}
+
+.hidden {
+    display: none !important;
 }
 
 
@@ -156,7 +179,7 @@ label {
 
 
 /* =========================================================
-   ACTIVITY LAYOUT
+   ASSESSMENT LAYOUT
 ========================================================= */
 
 .workspace-layout {
@@ -174,10 +197,25 @@ label {
     display: block;
 }
 
+.step {
+    margin-top: 20px;
+    padding-top: 5px;
+}
+
+.step-title {
+    color: #0f2d44;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .problem-display {
     text-align: center;
     font-size: 32px;
-    margin: 28px 0;
+    margin: 25px 0;
+}
+
+math {
+    font-family: serif;
 }
 
 
@@ -206,23 +244,8 @@ label {
 
 
 /* =========================================================
-   MATHML
-========================================================= */
-
-math {
-    font-family: serif;
-}
-
-
-/* =========================================================
    OPEN RADICAL ANSWER
 ========================================================= */
-
-.answer-heading {
-    text-align: center;
-    font-weight: bold;
-    margin: 18px 0 6px;
-}
 
 .radical-answer {
     display: flex;
@@ -232,14 +255,13 @@ math {
 }
 
 .outside-answer {
-    width: 120px;
+    width: 120px !important;
     height: 48px;
     margin-top: 14px;
-    padding: 6px 8px;
-    border: 2px solid #71838e;
-    border-radius: 6px;
+    padding: 6px 8px !important;
+    border: 2px solid #71838e !important;
     text-align: center;
-    font-size: 20px;
+    font-size: 20px !important;
 }
 
 .answer-root-symbol {
@@ -256,22 +278,39 @@ math {
 }
 
 .inside-answer {
-    width: 125px;
+    width: 125px !important;
     height: 48px;
-    padding: 6px 8px;
-    border: 2px solid #71838e;
-    border-radius: 6px;
+    padding: 6px 8px !important;
+    border: 2px solid #71838e !important;
     text-align: center;
-    font-size: 20px;
+    font-size: 20px !important;
 }
 
 .answer-labels {
     display: flex;
     justify-content: center;
-    gap: 68px;
+    gap: 65px;
     margin-top: -8px;
     color: #52616b;
     font-size: 14px;
+}
+
+
+/* =========================================================
+   SETUP GRID
+========================================================= */
+
+.setup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.setup-box {
+    background: #f6f9fb;
+    padding: 14px;
+    border-radius: 8px;
 }
 
 
@@ -340,10 +379,10 @@ input[type="range"] {
 
 
 /* =========================================================
-   FINAL MASTERY REPORT
+   FINAL REPORT
 ========================================================= */
 
-#masteryReport {
+#teacherReview {
     display: none;
     background: #ffffff;
     margin-top: 24px;
@@ -392,16 +431,6 @@ input[type="range"] {
     page-break-inside: avoid;
 }
 
-.report-problem h2 {
-    margin-top: 0;
-}
-
-.report-math {
-    font-size: 24px;
-    text-align: center;
-    margin: 14px 0;
-}
-
 .report-table {
     width: 100%;
     border-collapse: collapse;
@@ -417,37 +446,61 @@ input[type="range"] {
 }
 
 .report-table th {
-    width: 30%;
+    width: 31%;
     background: #f0f7fb;
     color: #0f2d44;
+}
+
+.report-math {
+    text-align: center;
+    font-size: 24px;
+    margin: 15px 0;
 }
 
 .work-image {
     display: block;
     max-width: 100%;
-    max-height: 480px;
+    max-height: 470px;
     object-fit: contain;
     margin: 14px auto 0;
     border: 1px solid #9aabb5;
-    background: #ffffff;
+}
+
+.no-whiteboard {
+    padding: 12px;
+    background: #f6f9fb;
+    border-radius: 7px;
+    font-style: italic;
+}
+
+.rubric-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rubric-table th,
+.rubric-table td {
+    padding: 10px;
+    border: 1px solid #d6e6ef;
+    text-align: left;
+}
+
+.rubric-table th {
+    background: #0f2d44;
+    color: #ffffff;
 }
 
 .verification-code {
-    display: inline-block;
-    padding: 8px 12px;
-    background: #f6f9fb;
-    border-radius: 6px;
     font-family: monospace;
-    font-size: 17px;
+    background: #f6f9fb;
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 6px;
 }
 
 .print-area {
     text-align: center;
-    margin: 22px 0;
-}
-
-.hidden {
-    display: none !important;
+    margin: 24px 0;
 }
 
 
@@ -470,28 +523,25 @@ input[type="range"] {
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
 
+    .setup-grid,
     .summary-grid {
         grid-template-columns: 1fr;
     }
 
     .outside-answer {
-        width: 90px;
+        width: 90px !important;
     }
 
     .inside-answer {
-        width: 95px;
-    }
-
-    .answer-labels {
-        gap: 35px;
+        width: 95px !important;
     }
 }
 
 
 /* =========================================================
-   PRINT / PDF
+   PRINT
 ========================================================= */
 
 @media print {
@@ -501,7 +551,6 @@ input[type="range"] {
     }
 
     body {
-        margin: 0;
         padding: 0;
         background: #ffffff;
         font-size: 11pt;
@@ -511,7 +560,7 @@ input[type="range"] {
         display: none !important;
     }
 
-    #masteryReport {
+    #teacherReview {
         display: block !important;
         margin: 0;
     }
@@ -526,135 +575,227 @@ input[type="range"] {
     }
 
     .work-image {
-        max-height: 360px;
+        max-height: 350px;
     }
 }
 </style>
 </head>
 
-
 <body>
 
 <div class="container">
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
-    <header class="hero no-print">
-        <h1>Radical Expressions Prove It!</h1>
-        <p>Algebra 1B | Unit 1 | Week 1</p>
-    </header>
+<header class="hero no-print">
+
+    <h1>Radical Expressions Prove It!</h1>
+
+    <p>
+        Algebra 1B | Unit 1 | Week 1
+    </p>
+
+</header>
 
 
-    <!-- =====================================================
-         START SCREEN
-    ====================================================== -->
+<!-- =====================================================
+     START SCREEN
+====================================================== -->
 
-    <section id="startScreen"
-             class="card blue-card no-print">
+<section id="startScreen"
+         class="card blue-card no-print">
 
-        <h2>Before You Begin</h2>
+    <h2>Show What You Know</h2>
 
-        <p>
-            You will complete four randomized radical-expression challenges.
-            Each problem must be correct before the next challenge unlocks.
+    <p>
+        This Prove It is designed to show your mathematical thinking,
+        not just whether you can enter a final answer.
+    </p>
+
+    <p>
+        You will complete four focused challenges involving radical expressions.
+    </p>
+
+    <div class="card green-card">
+
+        <h3 style="margin-top: 0;">Learning Objective</h3>
+
+        <p style="margin-bottom: 0;">
+            I can use the structure of an expression to simplify radical
+            expressions and justify the mathematical choices I make.
         </p>
 
-        <div class="card yellow-card">
+    </div>
 
-            <strong>Showing all work is mandatory.</strong>
+    <div class="card gray-card">
 
-            <p style="margin-bottom: 0;">
-                Your whiteboard work for every challenge will be saved
-                and included in your final Prove It Mastery Report.
-            </p>
+        <h3 style="margin-top: 0;">Standard</h3>
 
-        </div>
-
-        <p>
-            You may use the
-            <a class="calculator"
-               href="https://www.desmos.com/scientific"
-               target="_blank"
-               rel="noopener">
-                Desmos Scientific Calculator
-            </a>
-            when needed.
+        <p style="margin-bottom: 0;">
+            <strong>A1.A-SSE.A.2</strong> — Use the structure of expressions
+            to identify ways to rewrite them.
         </p>
 
-        <p>
-            <strong>
-                Calculator use does not replace showing your work.
-            </strong>
-        </p>
+    </div>
 
-        <label for="studentName">
-            First and Last Name
-        </label>
+    <div class="card yellow-card">
 
-        <input id="studentName"
-               class="name-input"
-               type="text"
-               autocomplete="name">
+        <strong>Your teacher determines the final score.</strong>
 
         <p>
-            <button id="beginButton"
-                    class="primary-button">
-                Begin Prove It!
-            </button>
+            The computer will verify objective answers when possible,
+            but your teacher will review your setup, work, reasoning,
+            independence, and revisions.
         </p>
 
-    </section>
+        <p style="margin-bottom: 0;">
+            Answer-check counts are recorded as evidence of independence.
+            They do not automatically determine your grade.
+        </p>
+
+    </div>
+
+    <p>
+        You may use the
+        <a class="calculator"
+           href="https://www.desmos.com/scientific"
+           target="_blank"
+           rel="noopener">
+            Desmos Scientific Calculator
+        </a>
+        when needed.
+    </p>
+
+    <label for="studentName">
+        First and Last Name
+    </label>
+
+    <input id="studentName"
+           type="text"
+           autocomplete="name">
+
+    <p>
+        <button id="beginButton"
+                class="primary-button">
+            Begin Prove It!
+        </button>
+    </p>
+
+</section>
 
 
-    <!-- =====================================================
-         ACTIVITY
-    ====================================================== -->
+<!-- =====================================================
+     ACTIVITY
+====================================================== -->
 
-    <div id="activity"
-         class="hidden no-print">
+<div id="activity"
+     class="hidden no-print">
 
-        <div class="progress-wrap">
+    <div class="progress-wrap">
 
-            <p id="progressText">
-                <strong>Progress:</strong> 0 of 4 mastered
-            </p>
+        <p id="progressText">
+            <strong>Progress:</strong> 0 of 4 challenges completed
+        </p>
 
-            <div class="progress-bar">
-                <div id="progressFill"
-                     class="progress-fill">
-                </div>
+        <div class="progress-bar">
+            <div id="progressFill"
+                 class="progress-fill">
             </div>
-
         </div>
 
+    </div>
 
-        <div class="workspace-layout">
 
-            <main>
+    <div class="workspace-layout">
 
-                <!-- =================================================
-                     CHALLENGE 1
-                ================================================== -->
+        <main>
 
-                <section id="challenge1"
-                         class="card challenge active">
+            <!-- =================================================
+                 CHALLENGE 1
+            ================================================== -->
 
-                    <h2>
-                        Challenge 1 — Numerical Radical
-                    </h2>
+            <section id="challenge1"
+                     class="card challenge active">
 
-                    <p>
-                        Simplify the radical completely.
-                    </p>
+                <h2>
+                    Challenge 1 — Set Up and Simplify
+                </h2>
 
-                    <div id="problem1"
-                         class="problem-display">
+                <p>
+                    Simplify the radical completely.
+                </p>
+
+                <div id="problem1"
+                     class="problem-display">
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 1: Set Up
                     </div>
 
-                    <div class="answer-heading">
-                        Enter your final simplified answer:
+                    <p>
+                        Rewrite the radicand as a perfect-square factor
+                        times the remaining factor.
+                    </p>
+
+                    <div class="setup-grid">
+
+                        <div class="setup-box">
+
+                            <label for="c1Square">
+                                Perfect-square factor
+                            </label>
+
+                            <input id="c1Square"
+                                   class="short-input"
+                                   type="text"
+                                   inputmode="numeric"
+                                   autocomplete="off">
+
+                        </div>
+
+                        <div class="setup-box">
+
+                            <label for="c1Remaining">
+                                Remaining factor
+                            </label>
+
+                            <input id="c1Remaining"
+                                   class="short-input"
+                                   type="text"
+                                   inputmode="numeric"
+                                   autocomplete="off">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 2: Show Your Work
+                    </div>
+
+                    <p>
+                        Use the whiteboard to show how your setup leads
+                        to the simplified radical.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 3: Final Answer
                     </div>
 
                     <div class="radical-answer">
@@ -662,7 +803,6 @@ input[type="range"] {
                         <input id="c1Outside"
                                class="outside-answer"
                                type="text"
-                               autocomplete="off"
                                aria-label="Expression outside the radical">
 
                         <span class="answer-root-symbol">
@@ -675,8 +815,7 @@ input[type="range"] {
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   autocomplete="off"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
 
                         </span>
 
@@ -687,43 +826,82 @@ input[type="range"] {
                         <span>Under radical</span>
                     </div>
 
-                    <p>
-                        <button class="primary-button"
-                                onclick="checkChallenge(1)">
-                            Check My Answer
-                        </button>
-                    </p>
+                </div>
 
-                    <div id="feedback1"
-                         class="feedback"
-                         aria-live="polite">
+
+                <p>
+                    <button class="primary-button"
+                            onclick="checkChallenge1()">
+                        Check My Work
+                    </button>
+                </p>
+
+                <div id="feedback1"
+                     class="feedback"
+                     aria-live="polite">
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHALLENGE 2
+            ================================================== -->
+
+            <section id="challenge2"
+                     class="card challenge">
+
+                <h2>
+                    Challenge 2 — Radical With a Variable
+                </h2>
+
+                <p>
+                    Assume <strong>x ≥ 0</strong>.
+                    Simplify completely.
+                </p>
+
+                <div id="problem2"
+                     class="problem-display">
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 1: Set Up
                     </div>
 
-                </section>
+                    <label for="c2VariableSetup">
+                        Under the condition x ≥ 0, what does
+                        √(x²) simplify to?
+                    </label>
+
+                    <input id="c2VariableSetup"
+                           class="short-input"
+                           type="text"
+                           autocomplete="off">
+
+                </div>
 
 
-                <!-- =================================================
-                     CHALLENGE 2
-                ================================================== -->
+                <div class="step">
 
-                <section id="challenge2"
-                         class="card challenge">
-
-                    <h2>
-                        Challenge 2 — Radical With a Variable
-                    </h2>
-
-                    <p>
-                        Assume <strong>x ≥ 0</strong>.
-                        Simplify completely.
-                    </p>
-
-                    <div id="problem2"
-                         class="problem-display">
+                    <div class="step-title">
+                        Step 2: Show Your Work
                     </div>
 
-                    <div class="answer-heading">
-                        Enter your final simplified answer:
+                    <p>
+                        Use the whiteboard to show how you simplify both
+                        the numerical part and the variable part.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 3: Final Answer
                     </div>
 
                     <div class="radical-answer">
@@ -731,7 +909,6 @@ input[type="range"] {
                         <input id="c2Outside"
                                class="outside-answer"
                                type="text"
-                               autocomplete="off"
                                placeholder="example: 4x"
                                aria-label="Expression outside the radical">
 
@@ -745,8 +922,7 @@ input[type="range"] {
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   autocomplete="off"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
 
                         </span>
 
@@ -757,60 +933,131 @@ input[type="range"] {
                         <span>Under radical</span>
                     </div>
 
-                    <p>
-                        <button class="primary-button"
-                                onclick="checkChallenge(2)">
-                            Check My Answer
-                        </button>
-                    </p>
+                </div>
 
-                    <div id="feedback2"
-                         class="feedback"
-                         aria-live="polite">
+
+                <div class="card green-card">
+
+                    <strong>Reasoning Check</strong>
+
+                    <label for="c2Reasoning">
+                        Which condition in the problem allows you to write
+                        x instead of |x|?
+                    </label>
+
+                    <textarea id="c2Reasoning"
+                              placeholder="A short phrase or sentence is enough."></textarea>
+
+                </div>
+
+
+                <p>
+                    <button class="primary-button"
+                            onclick="checkChallenge2()">
+                        Check My Work
+                    </button>
+                </p>
+
+                <div id="feedback2"
+                     class="feedback"
+                     aria-live="polite">
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHALLENGE 3
+            ================================================== -->
+
+            <section id="challenge3"
+                     class="card challenge">
+
+                <h2>
+                    Challenge 3 — Entire Fraction Under the Radical
+                </h2>
+
+                <p>
+                    Simplify completely.
+                    The <strong>entire fraction</strong> is under the square root.
+                </p>
+
+                <div id="problem3"
+                     class="problem-display">
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 1: Set Up
                     </div>
 
-                </section>
+                    <div class="setup-grid">
+
+                        <div class="setup-box">
+
+                            <label for="c3NumeratorSquare">
+                                Perfect-square factor in the numerator
+                            </label>
+
+                            <input id="c3NumeratorSquare"
+                                   class="short-input"
+                                   type="text"
+                                   inputmode="numeric">
+
+                        </div>
+
+                        <div class="setup-box">
+
+                            <label for="c3DenominatorRoot">
+                                Square root of the denominator
+                            </label>
+
+                            <input id="c3DenominatorRoot"
+                                   class="short-input"
+                                   type="text"
+                                   inputmode="numeric">
+
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-                <!-- =================================================
-                     CHALLENGE 3
-                ================================================== -->
+                <div class="step">
 
-                <section id="challenge3"
-                         class="card challenge">
-
-                    <h2>
-                        Challenge 3 — Radical Involving a Fraction
-                    </h2>
-
-                    <p>
-                        Simplify completely.
-                        <strong>
-                            The entire fraction is under the square root.
-                        </strong>
-                    </p>
-
-                    <div id="problem3"
-                         class="problem-display">
+                    <div class="step-title">
+                        Step 2: Show Your Work
                     </div>
 
                     <p>
-                        You may enter a fraction outside the radical,
-                        such as <strong>3/2</strong>.
+                        Use the whiteboard to show how you simplify
+                        the numerator and denominator.
                     </p>
 
-                    <div class="answer-heading">
-                        Enter your final simplified answer:
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-title">
+                        Step 3: Final Answer
                     </div>
+
+                    <p>
+                        A fractional coefficient may be entered as
+                        <strong>3/2</strong>.
+                    </p>
 
                     <div class="radical-answer">
 
                         <input id="c3Outside"
                                class="outside-answer"
                                type="text"
-                               autocomplete="off"
                                placeholder="example: 3/2"
-                               aria-label="Expression outside the radical">
+                               aria-label="Coefficient outside the radical">
 
                         <span class="answer-root-symbol">
                             &radic;
@@ -822,8 +1069,7 @@ input[type="range"] {
                                    class="inside-answer"
                                    type="text"
                                    inputmode="numeric"
-                                   autocomplete="off"
-                                   aria-label="Value remaining under the radical">
+                                   aria-label="Value under the radical">
 
                         </span>
 
@@ -834,529 +1080,620 @@ input[type="range"] {
                         <span>Under radical</span>
                     </div>
 
-                    <p>
-                        <button class="primary-button"
-                                onclick="checkChallenge(3)">
-                            Check My Answer
-                        </button>
-                    </p>
-
-                    <div id="feedback3"
-                         class="feedback"
-                         aria-live="polite">
-                    </div>
-
-                </section>
+                </div>
 
 
-                <!-- =================================================
-                     CHALLENGE 4
-                ================================================== -->
+                <p>
+                    <button class="primary-button"
+                            onclick="checkChallenge3()">
+                        Check My Work
+                    </button>
+                </p>
 
-                <section id="challenge4"
-                         class="card challenge">
+                <div id="feedback3"
+                     class="feedback"
+                     aria-live="polite">
+                </div>
 
-                    <h2>
-                        Challenge 4 — Mixed Radical Review
-                    </h2>
-
-                    <p>
-                        Assume <strong>x ≥ 0</strong>.
-                        Simplify completely.
-                    </p>
-
-                    <div id="problem4"
-                         class="problem-display">
-                    </div>
-
-                    <p>
-                        Enter the complete expression outside the radical.
-                        For example, you may type
-                        <strong>3x^2</strong>.
-                    </p>
-
-                    <div class="answer-heading">
-                        Enter your final simplified answer:
-                    </div>
-
-                    <div class="radical-answer">
-
-                        <input id="c4Outside"
-                               class="outside-answer"
-                               type="text"
-                               autocomplete="off"
-                               placeholder="example: 3x^2"
-                               aria-label="Expression outside the radical">
-
-                        <span class="answer-root-symbol">
-                            &radic;
-                        </span>
-
-                        <span class="answer-radicand">
-
-                            <input id="c4Inside"
-                                   class="inside-answer"
-                                   type="text"
-                                   inputmode="numeric"
-                                   autocomplete="off"
-                                   aria-label="Value remaining under the radical">
-
-                        </span>
-
-                    </div>
-
-                    <div class="answer-labels">
-                        <span>Outside</span>
-                        <span>Under radical</span>
-                    </div>
-
-                    <p>
-                        <button class="primary-button"
-                                onclick="checkChallenge(4)">
-                            Check My Answer
-                        </button>
-                    </p>
-
-                    <div id="feedback4"
-                         class="feedback"
-                         aria-live="polite">
-                    </div>
-
-                </section>
-
-            </main>
+            </section>
 
 
             <!-- =================================================
-                 WHITEBOARD
+                 CHALLENGE 4
             ================================================== -->
 
-            <aside class="card whiteboard-panel">
+            <section id="challenge4"
+                     class="card challenge">
 
                 <h2>
-                    Show Your Work
+                    Challenge 4 — Create a Radical
                 </h2>
 
-                <div class="whiteboard-required">
-                    Whiteboard work is required for every challenge.
-                </div>
-
-                <p id="whiteboardPrompt">
-                    Show all steps for Challenge 1 below.
+                <p>
+                    This final challenge works in reverse.
                 </p>
 
-                <canvas id="whiteboard"
-                        width="760"
-                        height="760"
-                        aria-label="Digital whiteboard for showing mathematical work">
-                </canvas>
+                <p>
+                    Create a single radical expression whose simplified
+                    form is:
+                </p>
 
-                <div class="whiteboard-controls">
+                <div id="target4"
+                     class="problem-display">
+                </div>
 
-                    <button class="secondary-button"
-                            type="button"
-                            onclick="setTool('pen')">
-                        Pen
-                    </button>
 
-                    <button class="secondary-button"
-                            type="button"
-                            onclick="setTool('eraser')">
-                        Eraser
-                    </button>
+                <div class="card green-card">
 
-                    <button class="secondary-button"
-                            type="button"
-                            onclick="undoStroke()">
-                        Undo
-                    </button>
+                    <strong>Set Up</strong>
 
-                    <button class="secondary-button"
-                            type="button"
-                            onclick="clearBoard()">
-                        Clear
-                    </button>
+                    <label for="c4SquareFactor">
+                        What perfect-square factor will you build into
+                        your radicand?
+                    </label>
+
+                    <input id="c4SquareFactor"
+                           class="short-input"
+                           type="text"
+                           inputmode="numeric">
 
                 </div>
 
-                <label for="lineWidth">
-                    Line Width
-                </label>
 
-                <input id="lineWidth"
-                       type="range"
-                       min="2"
-                       max="15"
-                       value="4">
+                <div class="step">
+
+                    <div class="step-title">
+                        Create Your Expression
+                    </div>
+
+                    <p>
+                        Enter one integer radicand that makes the statement true.
+                    </p>
+
+                    <div style="text-align: center; font-size: 28px; margin: 20px 0;">
+
+                        <span class="radical">
+
+                            <span class="root-symbol">
+                                &radic;
+                            </span>
+
+                            <span class="radicand">
+
+                                <input id="c4Radicand"
+                                       class="short-input"
+                                       type="text"
+                                       inputmode="numeric"
+                                       aria-label="Created radicand">
+
+                            </span>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
 
                 <div class="card yellow-card">
 
-                    <strong>Remember:</strong>
+                    <strong>No whiteboard is required for this challenge.</strong>
 
                     <p style="margin-bottom: 0;">
-                        Your whiteboard will be captured with this problem
-                        and included in your final PDF.
+                        Your created expression and perfect-square setup
+                        provide the evidence for this task.
                     </p>
 
                 </div>
 
-                <p style="text-align: center;">
 
-                    <a class="calculator"
-                       href="https://www.desmos.com/scientific"
-                       target="_blank"
-                       rel="noopener">
-                        Open Desmos Scientific Calculator
-                    </a>
-
+                <p>
+                    <button class="primary-button"
+                            onclick="checkChallenge4()">
+                        Check My Creation
+                    </button>
                 </p>
 
-            </aside>
+                <div id="feedback4"
+                     class="feedback"
+                     aria-live="polite">
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             WHITEBOARD
+        ================================================== -->
+
+        <aside id="whiteboardPanel"
+               class="card whiteboard-panel">
+
+            <h2>Show Your Work</h2>
+
+            <div class="whiteboard-required">
+                Whiteboard work is required for Challenges 1–3.
+            </div>
+
+            <p id="whiteboardPrompt">
+                Show your work for Challenge 1.
+            </p>
+
+            <canvas id="whiteboard"
+                    width="760"
+                    height="760"
+                    aria-label="Digital whiteboard">
+            </canvas>
+
+            <div class="whiteboard-controls">
+
+                <button type="button"
+                        class="secondary-button"
+                        onclick="setTool('pen')">
+                    Pen
+                </button>
+
+                <button type="button"
+                        class="secondary-button"
+                        onclick="setTool('eraser')">
+                    Eraser
+                </button>
+
+                <button type="button"
+                        class="secondary-button"
+                        onclick="undoStroke()">
+                    Undo
+                </button>
+
+                <button type="button"
+                        class="secondary-button"
+                        onclick="clearBoard()">
+                    Clear
+                </button>
+
+            </div>
+
+            <label for="lineWidth">
+                Line Width
+            </label>
+
+            <input id="lineWidth"
+                   type="range"
+                   min="2"
+                   max="15"
+                   value="4">
+
+
+            <p style="text-align: center;">
+
+                <a class="calculator"
+                   href="https://www.desmos.com/scientific"
+                   target="_blank"
+                   rel="noopener">
+                    Open Desmos Scientific Calculator
+                </a>
+
+            </p>
+
+        </aside>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     READY FOR TEACHER REVIEW
+====================================================== -->
+
+<section id="teacherReview">
+
+    <div class="report-title">
+
+        <h1>
+            Ready for Teacher Review
+        </h1>
+
+        <p style="margin: 6px 0 0;">
+            Algebra 1B | Unit 1 | Radical Expressions Prove It!
+        </p>
+
+    </div>
+
+
+    <div class="card blue-card">
+
+        <strong>Important:</strong>
+
+        <p style="margin-bottom: 0;">
+            The computer verified the objective portions of this activity.
+            Your teacher will determine the final Prove It score by reviewing
+            your setup, work, reasoning, revisions, independence, and accuracy.
+        </p>
+
+    </div>
+
+
+    <div class="summary-grid">
+
+        <div class="summary-item">
+
+            <span id="reportStudent"
+                  class="summary-value">
+            </span>
+
+            Student
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span id="reportTime"
+                  class="summary-value">
+            </span>
+
+            Elapsed Time
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span id="reportChecks"
+                  class="summary-value">
+            </span>
+
+            Total Checks
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span class="summary-value">
+                4 / 4
+            </span>
+
+            Objective Tasks Verified
 
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         FINAL MASTERY REPORT
-    ====================================================== -->
+    <!-- REPORT 1 -->
 
-    <section id="masteryReport">
+    <div class="report-problem">
 
-        <div class="report-title">
+        <h2>
+            Challenge 1 — Set Up and Simplify
+        </h2>
 
-            <h1>
-                Prove It Mastery Report
-            </h1>
-
-            <p style="margin: 6px 0 0;">
-                Algebra 1B | Unit 1 | Radical Expressions
-            </p>
-
+        <div id="reportProblem1"
+             class="report-math">
         </div>
 
+        <table class="report-table">
 
-        <div class="summary-grid">
+            <tr>
+                <th>First Setup</th>
+                <td id="reportFirstSetup1"></td>
+            </tr>
 
-            <div class="summary-item">
+            <tr>
+                <th>First Final Answer</th>
+                <td id="reportFirstAnswer1"></td>
+            </tr>
 
-                <span class="summary-value"
-                      id="reportStudent">
-                </span>
+            <tr>
+                <th>Final / Revised Setup</th>
+                <td id="reportFinalSetup1"></td>
+            </tr>
 
-                Student
+            <tr>
+                <th>Final / Revised Answer</th>
+                <td id="reportFinalAnswer1"></td>
+            </tr>
 
-            </div>
+            <tr>
+                <th>Correct Solution</th>
+                <td id="reportSolution1"></td>
+            </tr>
+
+            <tr>
+                <th>Answer Checks Used</th>
+                <td id="reportChecks1"></td>
+            </tr>
+
+        </table>
+
+        <h3>Student Whiteboard Work</h3>
+
+        <img id="reportWork1"
+             class="work-image"
+             alt="Student whiteboard work for Challenge 1">
+
+    </div>
 
 
-            <div class="summary-item">
+    <!-- REPORT 2 -->
 
-                <span class="summary-value"
-                      id="reportTime">
-                </span>
+    <div class="report-problem">
 
-                Time Taken
+        <h2>
+            Challenge 2 — Radical With a Variable
+        </h2>
 
-            </div>
-
-
-            <div class="summary-item">
-
-                <span class="summary-value"
-                      id="reportChecks">
-                </span>
-
-                Answer Checks
-
-            </div>
-
-
-            <div class="summary-item">
-
-                <span class="summary-value">
-                    4 / 4
-                </span>
-
-                Challenges Mastered
-
-            </div>
-
+        <div id="reportProblem2"
+             class="report-math">
         </div>
 
+        <table class="report-table">
 
-        <!-- =================================================
-             REPORT CHALLENGE 1
-        ================================================== -->
+            <tr>
+                <th>First Setup</th>
+                <td id="reportFirstSetup2"></td>
+            </tr>
 
-        <div class="report-problem">
+            <tr>
+                <th>First Final Answer</th>
+                <td id="reportFirstAnswer2"></td>
+            </tr>
 
-            <h2>
-                Challenge 1 — Numerical Radical
-            </h2>
+            <tr>
+                <th>Final / Revised Setup</th>
+                <td id="reportFinalSetup2"></td>
+            </tr>
 
-            <div id="reportProblem1"
-                 class="report-math">
-            </div>
+            <tr>
+                <th>Final / Revised Answer</th>
+                <td id="reportFinalAnswer2"></td>
+            </tr>
 
-            <table class="report-table">
+            <tr>
+                <th>Reasoning Check</th>
+                <td id="reportReasoning2"></td>
+            </tr>
 
-                <tr>
-                    <th>
-                        Student Final Answer
-                    </th>
+            <tr>
+                <th>Correct Solution</th>
+                <td id="reportSolution2"></td>
+            </tr>
 
-                    <td id="reportStudentAnswer1">
-                    </td>
-                </tr>
+            <tr>
+                <th>Answer Checks Used</th>
+                <td id="reportChecks2"></td>
+            </tr>
 
-                <tr>
-                    <th>
-                        Correct Solution
-                    </th>
+        </table>
 
-                    <td id="reportSolution1">
-                    </td>
-                </tr>
+        <h3>Student Whiteboard Work</h3>
 
-                <tr>
-                    <th>
-                        Answer Checks Used
-                    </th>
+        <img id="reportWork2"
+             class="work-image"
+             alt="Student whiteboard work for Challenge 2">
 
-                    <td id="reportChecks1">
-                    </td>
-                </tr>
+    </div>
 
-            </table>
 
-            <h3>
-                Student Whiteboard Work
-            </h3>
+    <!-- REPORT 3 -->
 
-            <img id="reportWork1"
-                 class="work-image"
-                 alt="Student whiteboard work for Challenge 1">
+    <div class="report-problem">
 
+        <h2>
+            Challenge 3 — Entire Fraction Under the Radical
+        </h2>
+
+        <div id="reportProblem3"
+             class="report-math">
         </div>
 
+        <table class="report-table">
 
-        <!-- =================================================
-             REPORT CHALLENGE 2
-        ================================================== -->
+            <tr>
+                <th>First Setup</th>
+                <td id="reportFirstSetup3"></td>
+            </tr>
 
-        <div class="report-problem">
+            <tr>
+                <th>First Final Answer</th>
+                <td id="reportFirstAnswer3"></td>
+            </tr>
 
-            <h2>
-                Challenge 2 — Radical With a Variable
-            </h2>
+            <tr>
+                <th>Final / Revised Setup</th>
+                <td id="reportFinalSetup3"></td>
+            </tr>
 
-            <div id="reportProblem2"
-                 class="report-math">
-            </div>
+            <tr>
+                <th>Final / Revised Answer</th>
+                <td id="reportFinalAnswer3"></td>
+            </tr>
 
-            <table class="report-table">
+            <tr>
+                <th>Correct Solution</th>
+                <td id="reportSolution3"></td>
+            </tr>
 
-                <tr>
-                    <th>
-                        Student Final Answer
-                    </th>
+            <tr>
+                <th>Answer Checks Used</th>
+                <td id="reportChecks3"></td>
+            </tr>
 
-                    <td id="reportStudentAnswer2">
-                    </td>
-                </tr>
+        </table>
 
-                <tr>
-                    <th>
-                        Correct Solution
-                    </th>
+        <h3>Student Whiteboard Work</h3>
 
-                    <td id="reportSolution2">
-                    </td>
-                </tr>
+        <img id="reportWork3"
+             class="work-image"
+             alt="Student whiteboard work for Challenge 3">
 
-                <tr>
-                    <th>
-                        Answer Checks Used
-                    </th>
+    </div>
 
-                    <td id="reportChecks2">
-                    </td>
-                </tr>
 
-            </table>
+    <!-- REPORT 4 -->
 
-            <h3>
-                Student Whiteboard Work
-            </h3>
+    <div class="report-problem">
 
-            <img id="reportWork2"
-                 class="work-image"
-                 alt="Student whiteboard work for Challenge 2">
+        <h2>
+            Challenge 4 — Create a Radical
+        </h2>
 
+        <p>
+            <strong>Target simplified form:</strong>
+        </p>
+
+        <div id="reportTarget4"
+             class="report-math">
         </div>
 
+        <table class="report-table">
 
-        <!-- =================================================
-             REPORT CHALLENGE 3
-        ================================================== -->
+            <tr>
+                <th>First Perfect-Square Setup</th>
+                <td id="reportFirstSetup4"></td>
+            </tr>
 
-        <div class="report-problem">
+            <tr>
+                <th>First Created Radicand</th>
+                <td id="reportFirstAnswer4"></td>
+            </tr>
 
-            <h2>
-                Challenge 3 — Radical Involving a Fraction
-            </h2>
+            <tr>
+                <th>Final / Revised Setup</th>
+                <td id="reportFinalSetup4"></td>
+            </tr>
 
-            <div id="reportProblem3"
-                 class="report-math">
-            </div>
+            <tr>
+                <th>Final Created Radical</th>
+                <td id="reportFinalAnswer4"></td>
+            </tr>
 
-            <table class="report-table">
+            <tr>
+                <th>Verified Relationship</th>
+                <td id="reportSolution4"></td>
+            </tr>
 
-                <tr>
-                    <th>
-                        Student Final Answer
-                    </th>
+            <tr>
+                <th>Answer Checks Used</th>
+                <td id="reportChecks4"></td>
+            </tr>
 
-                    <td id="reportStudentAnswer3">
-                    </td>
-                </tr>
+        </table>
 
-                <tr>
-                    <th>
-                        Correct Solution
-                    </th>
+        <h3>Evidence Type</h3>
 
-                    <td id="reportSolution3">
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        Answer Checks Used
-                    </th>
-
-                    <td id="reportChecks3">
-                    </td>
-                </tr>
-
-            </table>
-
-            <h3>
-                Student Whiteboard Work
-            </h3>
-
-            <img id="reportWork3"
-                 class="work-image"
-                 alt="Student whiteboard work for Challenge 3">
-
+        <div class="no-whiteboard">
+            This challenge intentionally used student-created mathematics
+            rather than a whiteboard. The setup and created radicand are
+            the evidence for this task.
         </div>
 
-
-        <!-- =================================================
-             REPORT CHALLENGE 4
-        ================================================== -->
-
-        <div class="report-problem">
-
-            <h2>
-                Challenge 4 — Mixed Radical Review
-            </h2>
-
-            <div id="reportProblem4"
-                 class="report-math">
-            </div>
-
-            <table class="report-table">
-
-                <tr>
-                    <th>
-                        Student Final Answer
-                    </th>
-
-                    <td id="reportStudentAnswer4">
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        Correct Solution
-                    </th>
-
-                    <td id="reportSolution4">
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        Answer Checks Used
-                    </th>
-
-                    <td id="reportChecks4">
-                    </td>
-                </tr>
-
-            </table>
-
-            <h3>
-                Student Whiteboard Work
-            </h3>
-
-            <img id="reportWork4"
-                 class="work-image"
-                 alt="Student whiteboard work for Challenge 4">
-
-        </div>
+    </div>
 
 
-        <!-- =================================================
-             COMPLETION RECORD
-        ================================================== -->
+    <!-- RUBRIC -->
 
-        <div class="card green-card">
+    <div class="card">
 
-            <h2 style="margin-top: 0;">
-                Completion Record
-            </h2>
+        <h2>
+            Teacher Prove It Scoring Guide
+        </h2>
 
-            <p>
-                <strong>Completed:</strong>
-                <span id="reportCompleted"></span>
-            </p>
+        <table class="rubric-table">
 
-            <p>
-                <strong>Verification Code:</strong>
+            <tr>
+                <th>Score</th>
+                <th>Evidence</th>
+            </tr>
 
-                <span id="reportVerification"
-                      class="verification-code">
-                </span>
-            </p>
+            <tr>
+                <td><strong>6</strong></td>
+                <td>
+                    Independent mastery with clear, correct work and reasoning
+                    and little or no reliance on feedback.
+                </td>
+            </tr>
 
-            <p style="margin-bottom: 0;">
-                All four challenges were answered correctly.
-                Whiteboard work was recorded for each challenge.
-            </p>
+            <tr>
+                <td><strong>5</strong></td>
+                <td>
+                    Proficient and mostly independent; minor correction or
+                    feedback may be needed.
+                </td>
+            </tr>
 
-        </div>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>
+                    Developing proficiency; meaningful understanding is shown,
+                    but some feedback is needed.
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>3</strong></td>
+                <td>
+                    Good-faith attempt showing some understanding, but
+                    substantial support or repeated feedback is needed.
+                </td>
+            </tr>
+
+            <tr>
+                <td><strong>0</strong></td>
+                <td>
+                    No usable evidence or no submission.
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
 
 
-        <div class="print-area no-print">
+    <div class="card green-card">
 
-            <p>
-                <strong>
-                    Save this entire report as a PDF and upload it to Canvas.
-                </strong>
-            </p>
+        <h2 style="margin-top: 0;">
+            Review Record
+        </h2>
 
-            <button class="primary-button"
-                    type="button"
-                    onclick="window.print()">
-                Print / Save Mastery Report as PDF
-            </button>
+        <p>
+            <strong>Completed:</strong>
+            <span id="reportCompleted"></span>
+        </p>
 
-        </div>
+        <p>
+            <strong>Verification Code:</strong>
+            <span id="reportVerification"
+                  class="verification-code"></span>
+        </p>
 
-    </section>
+        <p style="margin-bottom: 0;">
+            Status: <strong>Ready for Teacher Review</strong>
+        </p>
+
+    </div>
+
+
+    <div class="print-area no-print">
+
+        <p>
+            <strong>
+                Save this entire response record as a PDF and upload it to Canvas.
+            </strong>
+        </p>
+
+        <button class="primary-button"
+                onclick="window.print()">
+            Print / Save Response Record as PDF
+        </button>
+
+    </div>
+
+</section>
 
 </div>
 
@@ -1365,7 +1702,7 @@ input[type="range"] {
 "use strict";
 
 /* =========================================================
-   ACTIVITY DATA
+   RANDOMIZATION DATA
 ========================================================= */
 
 const squareFreeValues = [
@@ -1383,54 +1720,75 @@ const squareFreeValues = [
 
 let problems = {};
 
-let mastered = 0;
-let activeChallenge = 1;
+let currentChallenge = 1;
+let completedChallenges = 0;
 
 let startTime = null;
 let endTime = null;
 
 let totalChecks = 0;
 
-const challengeChecks = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0
-};
 
-const whiteboardImages = {
-    1: "",
-    2: "",
-    3: "",
-    4: ""
-};
+/* =========================================================
+   RESPONSE RECORD
+========================================================= */
 
-const studentAnswers = {
+const records = {
+
     1: {
-        outside: "",
-        inside: ""
+        checks: 0,
+        firstSetup: null,
+        firstAnswer: null,
+        finalSetup: null,
+        finalAnswer: null,
+        reasoning: "",
+        workImage: ""
     },
 
     2: {
-        outside: "",
-        inside: ""
+        checks: 0,
+        firstSetup: null,
+        firstAnswer: null,
+        finalSetup: null,
+        finalAnswer: null,
+        reasoning: "",
+        workImage: ""
     },
 
     3: {
-        outside: "",
-        inside: ""
+        checks: 0,
+        firstSetup: null,
+        firstAnswer: null,
+        finalSetup: null,
+        finalAnswer: null,
+        reasoning: "",
+        workImage: ""
     },
 
     4: {
-        outside: "",
-        inside: ""
+        checks: 0,
+        firstSetup: null,
+        firstAnswer: null,
+        finalSetup: null,
+        finalAnswer: null,
+        reasoning: "",
+        workImage: ""
     }
 };
 
 
 /* =========================================================
-   GENERAL HELPERS
+   HELPERS
 ========================================================= */
+
+function randomInteger(min, max) {
+
+    return Math.floor(
+        Math.random() *
+        (max - min + 1)
+    ) + min;
+}
+
 
 function randomChoice(array) {
 
@@ -1440,15 +1798,6 @@ function randomChoice(array) {
             array.length
         )
     ];
-}
-
-
-function randomInteger(min, max) {
-
-    return Math.floor(
-        Math.random() *
-        (max - min + 1)
-    ) + min;
 }
 
 
@@ -1469,148 +1818,15 @@ function gcd(a, b) {
 }
 
 
-function normalizeAnswer(value) {
+function normalize(value) {
 
-    return value
+    return String(value)
         .toLowerCase()
         .replace(/\s+/g, "")
         .replace(/\*/g, "")
         .replace(/²/g, "^2")
         .replace(/³/g, "^3")
-        .replace(/⁴/g, "^4")
-        .replace(/⁵/g, "^5");
-}
-
-
-/* =========================================================
-   STANDARD RADICAL FORMATTING
-========================================================= */
-
-function radicalHTML(content) {
-
-    return `
-        <span class="radical">
-
-            <span class="root-symbol">
-                &radic;
-            </span>
-
-            <span class="radicand">
-                ${content}
-            </span>
-
-        </span>
-    `;
-}
-
-
-/* =========================================================
-   CHALLENGE 3:
-   TRUE FRACTION UNDER RADICAL USING MATHML
-========================================================= */
-
-/*
-    This creates actual mathematical structure:
-
-            numerator
-        √  ───────────
-           denominator
-
-    The <mfrac> is INSIDE the <msqrt>, so the radical
-    genuinely applies to the entire fraction.
-*/
-
-function fractionUnderRadicalHTML(
-    numerator,
-    denominator
-) {
-
-    return `
-        <math xmlns="http://www.w3.org/1998/Math/MathML"
-              display="inline"
-              aria-label="square root of ${numerator} over ${denominator}">
-
-            <msqrt>
-
-                <mfrac>
-
-                    <mn>
-                        ${numerator}
-                    </mn>
-
-                    <mn>
-                        ${denominator}
-                    </mn>
-
-                </mfrac>
-
-            </msqrt>
-
-        </math>
-    `;
-}
-
-
-/* =========================================================
-   MATHML FRACTION COEFFICIENT + RADICAL
-========================================================= */
-
-function fractionCoefficientRadicalHTML(
-    numerator,
-    denominator,
-    radicand
-) {
-
-    return `
-        <math xmlns="http://www.w3.org/1998/Math/MathML"
-              display="inline">
-
-            <mrow>
-
-                <mfrac>
-
-                    <mn>
-                        ${numerator}
-                    </mn>
-
-                    <mn>
-                        ${denominator}
-                    </mn>
-
-                </mfrac>
-
-                <msqrt>
-
-                    <mn>
-                        ${radicand}
-                    </mn>
-
-                </msqrt>
-
-            </mrow>
-
-        </math>
-    `;
-}
-
-
-/* =========================================================
-   STUDENT ANSWER DISPLAY
-========================================================= */
-
-function typedAnswerHTML(
-    outside,
-    inside
-) {
-
-    return `
-        <span style="white-space: nowrap;">
-            ${escapeHTML(outside)}
-            ${radicalHTML(
-                escapeHTML(inside)
-            )}
-        </span>
-    `;
+        .replace(/⁴/g, "^4");
 }
 
 
@@ -1626,73 +1842,115 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   CORRECT ANSWER DISPLAY
+   MATH HTML
 ========================================================= */
 
-function correctAnswerHTML(number) {
-
-    if (number === 3) {
-
-        return fractionCoefficientRadicalHTML(
-            problems[3].outsideNumerator,
-            problems[3].outsideDenominator,
-            problems[3].inside
-        );
-    }
-
-    return radicalAnswerHTML(
-        problems[number].outsideDisplay,
-        problems[number].inside
-    );
-}
-
-
-function radicalAnswerHTML(
-    outside,
-    inside
-) {
+function radicalHTML(content) {
 
     return `
-        <span style="white-space: nowrap;">
-            ${outside}
-            ${radicalHTML(inside)}
+        <span class="radical">
+            <span class="root-symbol">&radic;</span>
+            <span class="radicand">${content}</span>
         </span>
     `;
 }
 
 
+function fractionUnderRadicalHTML(
+    numerator,
+    denominator
+) {
+
+    return `
+        <math xmlns="http://www.w3.org/1998/Math/MathML"
+              display="inline">
+
+            <msqrt>
+
+                <mfrac>
+
+                    <mn>${numerator}</mn>
+
+                    <mn>${denominator}</mn>
+
+                </mfrac>
+
+            </msqrt>
+
+        </math>
+    `;
+}
+
+
+function fractionalCoefficientRadicalHTML(
+    numerator,
+    denominator,
+    radicand
+) {
+
+    return `
+        <math xmlns="http://www.w3.org/1998/Math/MathML"
+              display="inline">
+
+            <mrow>
+
+                <mfrac>
+                    <mn>${numerator}</mn>
+                    <mn>${denominator}</mn>
+                </mfrac>
+
+                <msqrt>
+                    <mn>${radicand}</mn>
+                </msqrt>
+
+            </mrow>
+
+        </math>
+    `;
+}
+
+
+function answerHTML(
+    outside,
+    inside
+) {
+
+    return `
+        ${escapeHTML(outside)}
+        ${radicalHTML(
+            escapeHTML(inside)
+        )}
+    `;
+}
+
+
 /* =========================================================
-   PROBLEM GENERATION
+   GENERATE VALID PROBLEMS
 ========================================================= */
 
 function generateProblems() {
 
-    /* -----------------------------------------------------
+    /*
        CHALLENGE 1
 
        √(a²b) = a√b
-    ----------------------------------------------------- */
+    */
 
-    const a1 =
-        randomInteger(2, 9);
-
-    const b1 =
-        randomChoice(
-            squareFreeValues
-        );
-
+    const a1 = randomInteger(2, 9);
+    const b1 = randomChoice(squareFreeValues);
 
     problems[1] = {
 
-        original:
-            a1 *
-            a1 *
-            b1,
+        a: a1,
+        b: b1,
+
+        radicand:
+            a1 * a1 * b1,
+
+        squareFactor:
+            a1 * a1,
 
         outside:
-            String(a1),
-
-        outsideDisplay:
             String(a1),
 
         inside:
@@ -1700,34 +1958,26 @@ function generateProblems() {
     };
 
 
-    /* -----------------------------------------------------
+    /*
        CHALLENGE 2
 
        √(a² b x²) = ax√b
 
-       Assume x ≥ 0.
-    ----------------------------------------------------- */
+       x ≥ 0
+    */
 
-    const a2 =
-        randomInteger(2, 8);
-
-    const b2 =
-        randomChoice(
-            squareFreeValues
-        );
-
+    const a2 = randomInteger(2, 8);
+    const b2 = randomChoice(squareFreeValues);
 
     problems[2] = {
 
-        original:
-            a2 *
-            a2 *
-            b2,
+        a: a2,
+        b: b2,
+
+        radicand:
+            a2 * a2 * b2,
 
         outside:
-            a2 + "x",
-
-        outsideDisplay:
             a2 + "x",
 
         inside:
@@ -1735,129 +1985,90 @@ function generateProblems() {
     };
 
 
-    /* -----------------------------------------------------
+    /*
        CHALLENGE 3
 
-               a²b
-       √    ─────────
-                d²
+           a²b
+       √ --------
+            d²
 
        = (a/d)√b
 
-       Entire fraction is under the radical.
-    ----------------------------------------------------- */
+       Require gcd(a,d)=1.
+    */
 
     let a3;
     let d3;
 
-
     do {
 
-        a3 =
-            randomInteger(
-                2,
-                8
-            );
-
-        d3 =
-            randomInteger(
-                2,
-                8
-            );
+        a3 = randomInteger(2, 8);
+        d3 = randomInteger(2, 8);
 
     } while (
-        gcd(
-            a3,
-            d3
-        ) !== 1
+        gcd(a3, d3) !== 1
     );
 
-
     const b3 =
-        randomChoice(
-            squareFreeValues
-        );
-
+        randomChoice(squareFreeValues);
 
     problems[3] = {
 
+        a: a3,
+        b: b3,
+        d: d3,
+
         numerator:
-            a3 *
-            a3 *
-            b3,
+            a3 * a3 * b3,
 
         denominator:
-            d3 *
+            d3 * d3,
+
+        numeratorSquare:
+            a3 * a3,
+
+        denominatorRoot:
             d3,
 
         outside:
-            a3 +
-            "/" +
-            d3,
-
-        outsideNumerator:
-            a3,
-
-        outsideDenominator:
-            d3,
+            a3 + "/" + d3,
 
         inside:
             String(b3)
     };
 
 
-    /* -----------------------------------------------------
+    /*
        CHALLENGE 4
 
-       √(a² b x^(2n))
-       =
-       ax^n√b
+       Target = a√b
 
-       Assume x ≥ 0.
-    ----------------------------------------------------- */
+       Student must create:
 
-    const a4 =
-        randomInteger(
-            2,
-            7
-        );
+       √(a²b)
 
-    const b4 =
-        randomChoice(
-            squareFreeValues
-        );
+       This requires transfer/reverse reasoning.
+    */
 
-    const n4 =
-        randomInteger(
-            2,
-            4
-        );
-
+    const a4 = randomInteger(2, 8);
+    const b4 = randomChoice(squareFreeValues);
 
     problems[4] = {
 
-        original:
-            a4 *
-            a4 *
+        a: a4,
+        b: b4,
+
+        targetOutside:
+            a4,
+
+        targetInside:
             b4,
 
-        insideExponent:
-            2 *
-            n4,
+        squareFactor:
+            a4 * a4,
 
-        outside:
-            a4 +
-            "x^" +
-            n4,
-
-        outsideDisplay:
-            a4 +
-            "x<sup>" +
-            n4 +
-            "</sup>",
-
-        inside:
-            String(b4)
+        correctRadicand:
+            a4 * a4 * b4
     };
 
 
@@ -1866,38 +2077,27 @@ function generateProblems() {
 
 
 /* =========================================================
-   DISPLAY PROBLEMS
+   RENDER
 ========================================================= */
 
 function renderProblems() {
-
-    /* Challenge 1 */
 
     document.getElementById(
         "problem1"
     ).innerHTML =
         radicalHTML(
-            problems[1].original
+            problems[1].radicand
         );
 
-
-    /* Challenge 2 */
 
     document.getElementById(
         "problem2"
     ).innerHTML =
         radicalHTML(
-            problems[2].original +
+            problems[2].radicand +
             "x<sup>2</sup>"
         );
 
-
-    /*
-       Challenge 3
-
-       Native MathML.
-       The full fraction is inside msqrt.
-    */
 
     document.getElementById(
         "problem3"
@@ -1908,22 +2108,55 @@ function renderProblems() {
         );
 
 
-    /* Challenge 4 */
-
     document.getElementById(
-        "problem4"
+        "target4"
     ).innerHTML =
+        problems[4].targetOutside +
         radicalHTML(
-            problems[4].original +
-            "x<sup>" +
-            problems[4].insideExponent +
-            "</sup>"
+            problems[4].targetInside
         );
 }
 
 
 /* =========================================================
-   FEEDBACK
+   ATTEMPT RECORDING
+========================================================= */
+
+function recordFirstAttempt(
+    number,
+    setup,
+    answer
+) {
+
+    if (
+        records[number].firstSetup === null
+    ) {
+
+        records[number].firstSetup =
+            setup;
+
+        records[number].firstAnswer =
+            answer;
+    }
+}
+
+
+function recordFinalAttempt(
+    number,
+    setup,
+    answer
+) {
+
+    records[number].finalSetup =
+        setup;
+
+    records[number].finalAnswer =
+        answer;
+}
+
+
+/* =========================================================
+   FEEDBACK / HINTS
 ========================================================= */
 
 function setFeedback(
@@ -1932,14 +2165,12 @@ function setFeedback(
     message
 ) {
 
-    const feedback =
+    const box =
         document.getElementById(
-            "feedback" +
-            number
+            "feedback" + number
         );
 
-
-    feedback.className =
+    box.className =
         "feedback " +
         (
             correct
@@ -1947,246 +2178,593 @@ function setFeedback(
                 : "incorrect"
         );
 
-
-    feedback.textContent =
+    box.textContent =
         message;
 }
 
 
+function progressiveHint(
+    number
+) {
+
+    const checks =
+        records[number].checks;
+
+
+    if (number === 1) {
+
+        if (checks === 1) {
+            return "Check whether your setup uses a perfect-square factor of the radicand.";
+        }
+
+        if (checks === 2) {
+            return "Multiply your two setup factors. They should equal the original radicand.";
+        }
+
+        return "Recheck both the perfect-square factor and what remains after that factor is removed.";
+    }
+
+
+    if (number === 2) {
+
+        if (checks === 1) {
+            return "Check the numerical perfect-square factor and how the x² term simplifies.";
+        }
+
+        if (checks === 2) {
+            return "Remember that the condition x ≥ 0 matters when simplifying the variable part.";
+        }
+
+        return "Review your numerical factorization and your variable simplification separately.";
+    }
+
+
+    if (number === 3) {
+
+        if (checks === 1) {
+            return "Remember that the numerator and denominator are both inside the square root.";
+        }
+
+        if (checks === 2) {
+            return "Simplify the square root of the numerator and the square root of the denominator separately.";
+        }
+
+        return "Check your numerator perfect-square factor and the square root of the denominator.";
+    }
+
+
+    if (number === 4) {
+
+        if (checks === 1) {
+            return "Think in reverse: what must be squared to create the coefficient outside the radical?";
+        }
+
+        if (checks === 2) {
+            return "Your radicand should contain a perfect-square factor and the target square-free factor.";
+        }
+
+        return "Multiply your chosen perfect-square factor by the number that must remain under the radical.";
+    }
+
+
+    return "Check your work and try again.";
+}
+
+
 /* =========================================================
-   CHECK ANSWER
+   CHALLENGE 1
 ========================================================= */
 
-function checkChallenge(number) {
+function checkChallenge1() {
 
     totalChecks++;
-
-    challengeChecks[
-        number
-    ]++;
+    records[1].checks++;
 
 
-    /*
-       Require whiteboard evidence before
-       validating the numerical answer.
-    */
-
-    if (
-        !hasRequiredWork()
-    ) {
-
-        setFeedback(
-            number,
-            false,
-            "Show your work on the whiteboard before checking your final answer."
-        );
-
-        return;
-    }
-
-
-    const outsideElement =
+    const square =
         document.getElementById(
-            "c" +
-            number +
-            "Outside"
-        );
+            "c1Square"
+        ).value.trim();
 
-
-    const insideElement =
+    const remaining =
         document.getElementById(
-            "c" +
-            number +
-            "Inside"
-        );
-
-
-    const outsideRaw =
-        outsideElement.value.trim();
-
-
-    const insideRaw =
-        insideElement.value.trim();
-
-
-    if (
-        outsideRaw === "" ||
-        insideRaw === ""
-    ) {
-
-        setFeedback(
-            number,
-            false,
-            "Complete both parts of the radical answer before checking."
-        );
-
-        return;
-    }
-
+            "c1Remaining"
+        ).value.trim();
 
     const outside =
-        normalizeAnswer(
-            outsideRaw
-        );
-
+        document.getElementById(
+            "c1Outside"
+        ).value.trim();
 
     const inside =
-        normalizeAnswer(
-            insideRaw
+        document.getElementById(
+            "c1Inside"
+        ).value.trim();
+
+
+    const setupRecord =
+        "Perfect-square factor: " +
+        square +
+        "; Remaining factor: " +
+        remaining;
+
+
+    const answerRecord =
+        outside +
+        "√" +
+        inside;
+
+
+    recordFirstAttempt(
+        1,
+        setupRecord,
+        answerRecord
+    );
+
+
+    if (!hasRequiredWork()) {
+
+        setFeedback(
+            1,
+            false,
+            "Show your simplification work on the whiteboard before checking."
         );
 
+        return;
+    }
 
-    const expectedOutside =
-        normalizeAnswer(
-            problems[
-                number
-            ].outside
+
+    const correct =
+        Number(square) ===
+            problems[1].squareFactor &&
+
+        Number(remaining) ===
+            problems[1].b &&
+
+        normalize(outside) ===
+            problems[1].outside &&
+
+        normalize(inside) ===
+            problems[1].inside;
+
+
+    if (correct) {
+
+        recordFinalAttempt(
+            1,
+            setupRecord,
+            answerRecord
         );
 
-
-    const expectedInside =
-        normalizeAnswer(
-            problems[
-                number
-            ].inside
-        );
-
-
-    if (
-        outside ===
-            expectedOutside &&
-        inside ===
-            expectedInside
-    ) {
-
-        /*
-           Save exactly what the student entered.
-        */
-
-        studentAnswers[
-            number
-        ] = {
-
-            outside:
-                outsideRaw,
-
-            inside:
-                insideRaw
-        };
-
-
-        /*
-           Capture whiteboard BEFORE it gets cleared.
-        */
-
-        whiteboardImages[
-            number
-        ] =
+        records[1].workImage =
             captureWhiteboard();
 
 
         setFeedback(
-            number,
+            1,
             true,
-            "Correct! Your simplified radical is correct."
+            "Objective work verified. Challenge 2 is ready."
         );
 
 
         setTimeout(
             function () {
-
-                advanceChallenge(
-                    number
-                );
-
+                advanceChallenge(1);
             },
-            650
+            550
         );
 
     } else {
 
         setFeedback(
-            number,
+            1,
             false,
-            "Not quite. Check both the expression outside the radical and the value remaining under the radical. Revise your work and try again."
+            progressiveHint(1)
         );
     }
 }
 
 
 /* =========================================================
-   ADVANCE CHALLENGE
+   CHALLENGE 2
 ========================================================= */
 
-function advanceChallenge(
-    number
-) {
+function checkChallenge2() {
 
-    mastered++;
+    totalChecks++;
+    records[2].checks++;
+
+
+    const variableSetup =
+        document.getElementById(
+            "c2VariableSetup"
+        ).value.trim();
+
+
+    const outside =
+        document.getElementById(
+            "c2Outside"
+        ).value.trim();
+
+
+    const inside =
+        document.getElementById(
+            "c2Inside"
+        ).value.trim();
+
+
+    const reasoning =
+        document.getElementById(
+            "c2Reasoning"
+        ).value.trim();
+
+
+    const setupRecord =
+        "√(x²) = " +
+        variableSetup;
+
+
+    const answerRecord =
+        outside +
+        "√" +
+        inside;
+
+
+    recordFirstAttempt(
+        2,
+        setupRecord,
+        answerRecord
+    );
+
+
+    if (!hasRequiredWork()) {
+
+        setFeedback(
+            2,
+            false,
+            "Show your algebra on the whiteboard before checking."
+        );
+
+        return;
+    }
+
+
+    if (reasoning.length < 2) {
+
+        setFeedback(
+            2,
+            false,
+            "Complete the short Reasoning Check before checking your work."
+        );
+
+        return;
+    }
+
+
+    const correct =
+        normalize(variableSetup) ===
+            "x" &&
+
+        normalize(outside) ===
+            normalize(
+                problems[2].outside
+            ) &&
+
+        normalize(inside) ===
+            problems[2].inside;
+
+
+    if (correct) {
+
+        recordFinalAttempt(
+            2,
+            setupRecord,
+            answerRecord
+        );
+
+        records[2].reasoning =
+            reasoning;
+
+        records[2].workImage =
+            captureWhiteboard();
+
+
+        setFeedback(
+            2,
+            true,
+            "Objective work verified. Your teacher will review the reasoning response."
+        );
+
+
+        setTimeout(
+            function () {
+                advanceChallenge(2);
+            },
+            550
+        );
+
+    } else {
+
+        setFeedback(
+            2,
+            false,
+            progressiveHint(2)
+        );
+    }
+}
+
+
+/* =========================================================
+   CHALLENGE 3
+========================================================= */
+
+function checkChallenge3() {
+
+    totalChecks++;
+    records[3].checks++;
+
+
+    const numeratorSquare =
+        document.getElementById(
+            "c3NumeratorSquare"
+        ).value.trim();
+
+
+    const denominatorRoot =
+        document.getElementById(
+            "c3DenominatorRoot"
+        ).value.trim();
+
+
+    const outside =
+        document.getElementById(
+            "c3Outside"
+        ).value.trim();
+
+
+    const inside =
+        document.getElementById(
+            "c3Inside"
+        ).value.trim();
+
+
+    const setupRecord =
+        "Numerator perfect-square factor: " +
+        numeratorSquare +
+        "; √denominator = " +
+        denominatorRoot;
+
+
+    const answerRecord =
+        outside +
+        "√" +
+        inside;
+
+
+    recordFirstAttempt(
+        3,
+        setupRecord,
+        answerRecord
+    );
+
+
+    if (!hasRequiredWork()) {
+
+        setFeedback(
+            3,
+            false,
+            "Show how you simplify the numerator and denominator on the whiteboard first."
+        );
+
+        return;
+    }
+
+
+    const correct =
+        Number(numeratorSquare) ===
+            problems[3].numeratorSquare &&
+
+        Number(denominatorRoot) ===
+            problems[3].denominatorRoot &&
+
+        normalize(outside) ===
+            normalize(
+                problems[3].outside
+            ) &&
+
+        normalize(inside) ===
+            problems[3].inside;
+
+
+    if (correct) {
+
+        recordFinalAttempt(
+            3,
+            setupRecord,
+            answerRecord
+        );
+
+        records[3].workImage =
+            captureWhiteboard();
+
+
+        setFeedback(
+            3,
+            true,
+            "Objective work verified. The final creation challenge is ready."
+        );
+
+
+        setTimeout(
+            function () {
+                advanceChallenge(3);
+            },
+            550
+        );
+
+    } else {
+
+        setFeedback(
+            3,
+            false,
+            progressiveHint(3)
+        );
+    }
+}
+
+
+/* =========================================================
+   CHALLENGE 4
+========================================================= */
+
+function checkChallenge4() {
+
+    totalChecks++;
+    records[4].checks++;
+
+
+    const squareFactor =
+        document.getElementById(
+            "c4SquareFactor"
+        ).value.trim();
+
+
+    const radicand =
+        document.getElementById(
+            "c4Radicand"
+        ).value.trim();
+
+
+    const setupRecord =
+        "Perfect-square factor used: " +
+        squareFactor;
+
+
+    const answerRecord =
+        "√" +
+        radicand;
+
+
+    recordFirstAttempt(
+        4,
+        setupRecord,
+        answerRecord
+    );
+
+
+    const correct =
+        Number(squareFactor) ===
+            problems[4].squareFactor &&
+
+        Number(radicand) ===
+            problems[4].correctRadicand;
+
+
+    if (correct) {
+
+        recordFinalAttempt(
+            4,
+            setupRecord,
+            answerRecord
+        );
+
+
+        setFeedback(
+            4,
+            true,
+            "Your created radical is mathematically valid."
+        );
+
+
+        setTimeout(
+            function () {
+                finishAssessment();
+            },
+            550
+        );
+
+    } else {
+
+        setFeedback(
+            4,
+            false,
+            progressiveHint(4)
+        );
+    }
+}
+
+
+/* =========================================================
+   ADVANCE
+========================================================= */
+
+function advanceChallenge(number) {
+
+    completedChallenges++;
 
     updateProgress();
 
 
     document.getElementById(
-        "challenge" +
-        number
+        "challenge" + number
     ).classList.remove(
         "active"
     );
 
 
-    if (
-        number <
-        4
-    ) {
+    currentChallenge =
+        number + 1;
 
-        activeChallenge =
-            number +
-            1;
 
+    document.getElementById(
+        "challenge" +
+        currentChallenge
+    ).classList.add(
+        "active"
+    );
+
+
+    if (currentChallenge <= 3) {
+
+        clearBoard();
 
         document.getElementById(
-            "challenge" +
-            activeChallenge
-        ).classList.add(
-            "active"
+            "whiteboardPanel"
+        ).classList.remove(
+            "hidden"
         );
-
 
         document.getElementById(
             "whiteboardPrompt"
         ).textContent =
-            "Show all steps for Challenge " +
-            activeChallenge +
-            " below.";
-
-
-        /*
-           Previous board has already been captured.
-           Start next challenge with a clean board.
-        */
-
-        clearBoard();
-
-
-        document.getElementById(
-            "challenge" +
-            activeChallenge
-        ).scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+            "Show your work for Challenge " +
+            currentChallenge +
+            ".";
 
     } else {
 
-        finishActivity();
+        /*
+           Challenge 4 intentionally does not
+           use a whiteboard.
+        */
+
+        document.getElementById(
+            "whiteboardPanel"
+        ).classList.add(
+            "hidden"
+        );
     }
+
+
+    document.getElementById(
+        "challenge" +
+        currentChallenge
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
-
-/* =========================================================
-   UPDATE PROGRESS
-========================================================= */
 
 function updateProgress() {
 
@@ -2194,15 +2772,15 @@ function updateProgress() {
         "progressText"
     ).innerHTML =
         "<strong>Progress:</strong> " +
-        mastered +
-        " of 4 mastered";
+        completedChallenges +
+        " of 4 challenges completed";
 
 
     document.getElementById(
         "progressFill"
     ).style.width =
         (
-            mastered /
+            completedChallenges /
             4 *
             100
         ) +
@@ -2219,29 +2797,19 @@ const canvas =
         "whiteboard"
     );
 
-
 const ctx =
     canvas.getContext(
         "2d"
     );
 
+let drawing = false;
 
-let drawing =
-    false;
+let tool = "pen";
 
-let tool =
-    "pen";
+let strokes = [];
 
-let strokes =
-    [];
+let currentStroke = [];
 
-let currentStroke =
-    [];
-
-
-/* ---------------------------------------------------------
-   INITIAL WHITE BACKGROUND
---------------------------------------------------------- */
 
 function prepareCanvas() {
 
@@ -2257,13 +2825,7 @@ function prepareCanvas() {
 }
 
 
-/* ---------------------------------------------------------
-   POSITION
---------------------------------------------------------- */
-
-function canvasPoint(
-    event
-) {
+function canvasPoint(event) {
 
     const rect =
         canvas.getBoundingClientRect();
@@ -2300,36 +2862,22 @@ function canvasPoint(
 }
 
 
-/* ---------------------------------------------------------
-   START DRAWING
---------------------------------------------------------- */
-
-function startDrawing(
-    event
-) {
+function startDrawing(event) {
 
     event.preventDefault();
 
-    drawing =
-        true;
+    drawing = true;
 
 
     const point =
-        canvasPoint(
-            event
-        );
+        canvasPoint(event);
 
 
     currentStroke = [{
 
-        x:
-            point.x,
-
-        y:
-            point.y,
-
-        tool:
-            tool,
+        x: point.x,
+        y: point.y,
+        tool: tool,
 
         width:
             Number(
@@ -2341,17 +2889,9 @@ function startDrawing(
 }
 
 
-/* ---------------------------------------------------------
-   DRAW
---------------------------------------------------------- */
+function draw(event) {
 
-function draw(
-    event
-) {
-
-    if (
-        !drawing
-    ) {
+    if (!drawing) {
         return;
     }
 
@@ -2360,28 +2900,20 @@ function draw(
 
 
     const point =
-        canvasPoint(
-            event
-        );
+        canvasPoint(event);
 
 
     const last =
         currentStroke[
-            currentStroke.length -
-            1
+            currentStroke.length - 1
         ];
 
 
     const data = {
 
-        x:
-            point.x,
-
-        y:
-            point.y,
-
-        tool:
-            tool,
+        x: point.x,
+        y: point.y,
+        tool: tool,
 
         width:
             Number(
@@ -2404,26 +2936,18 @@ function draw(
 }
 
 
-/* ---------------------------------------------------------
-   STOP DRAWING
---------------------------------------------------------- */
-
 function stopDrawing() {
 
-    if (
-        !drawing
-    ) {
+    if (!drawing) {
         return;
     }
 
 
-    drawing =
-        false;
+    drawing = false;
 
 
     if (
-        currentStroke.length >
-        1
+        currentStroke.length > 1
     ) {
 
         strokes.push(
@@ -2432,19 +2956,11 @@ function stopDrawing() {
     }
 
 
-    currentStroke =
-        [];
+    currentStroke = [];
 }
 
 
-/* ---------------------------------------------------------
-   DRAW SEGMENT
---------------------------------------------------------- */
-
-function drawSegment(
-    a,
-    b
-) {
+function drawSegment(a, b) {
 
     ctx.beginPath();
 
@@ -2469,8 +2985,7 @@ function drawSegment(
 
 
     ctx.strokeStyle =
-        b.tool ===
-        "eraser"
+        b.tool === "eraser"
             ? "#ffffff"
             : "#1f2933";
 
@@ -2479,42 +2994,20 @@ function drawSegment(
 }
 
 
-/* ---------------------------------------------------------
-   TOOL
---------------------------------------------------------- */
-
-function setTool(
-    newTool
-) {
+function setTool(newTool) {
 
     tool =
         newTool;
 }
 
 
-/* ---------------------------------------------------------
-   REQUIRED WORK
---------------------------------------------------------- */
-
 function hasRequiredWork() {
 
-    /*
-       This prevents an accidental single mark
-       from satisfying the work requirement.
-
-       It does NOT attempt to grade handwriting.
-    */
-
     return (
-        strokes.length >=
-        2
+        strokes.length >= 2
     );
 }
 
-
-/* ---------------------------------------------------------
-   CAPTURE IMAGE
---------------------------------------------------------- */
 
 function captureWhiteboard() {
 
@@ -2524,10 +3017,6 @@ function captureWhiteboard() {
 }
 
 
-/* ---------------------------------------------------------
-   UNDO
---------------------------------------------------------- */
-
 function undoStroke() {
 
     strokes.pop();
@@ -2535,10 +3024,6 @@ function undoStroke() {
     redrawBoard();
 }
 
-
-/* ---------------------------------------------------------
-   REDRAW
---------------------------------------------------------- */
 
 function redrawBoard() {
 
@@ -2554,21 +3039,16 @@ function redrawBoard() {
 
 
     strokes.forEach(
-        function (
-            stroke
-        ) {
+        function (stroke) {
 
             for (
                 let i = 1;
-                i <
-                stroke.length;
+                i < stroke.length;
                 i++
             ) {
 
                 drawSegment(
-                    stroke[
-                        i - 1
-                    ],
+                    stroke[i - 1],
                     stroke[i]
                 );
             }
@@ -2577,22 +3057,15 @@ function redrawBoard() {
 }
 
 
-/* ---------------------------------------------------------
-   CLEAR
---------------------------------------------------------- */
-
 function clearBoard() {
 
-    strokes =
-        [];
+    strokes = [];
 
-    currentStroke =
-        [];
+    currentStroke = [];
 
 
     ctx.fillStyle =
         "#ffffff";
-
 
     ctx.fillRect(
         0,
@@ -2603,9 +3076,7 @@ function clearBoard() {
 }
 
 
-/* ---------------------------------------------------------
-   MOUSE EVENTS
---------------------------------------------------------- */
+/* Mouse */
 
 canvas.addEventListener(
     "mousedown",
@@ -2623,9 +3094,7 @@ window.addEventListener(
 );
 
 
-/* ---------------------------------------------------------
-   TOUCH EVENTS
---------------------------------------------------------- */
+/* Touch */
 
 canvas.addEventListener(
     "touchstart",
@@ -2653,11 +3122,9 @@ canvas.addEventListener(
    TIMER
 ========================================================= */
 
-function formatElapsed(
-    milliseconds
-) {
+function formatElapsed(milliseconds) {
 
-    const totalSeconds =
+    const secondsTotal =
         Math.floor(
             milliseconds /
             1000
@@ -2666,13 +3133,13 @@ function formatElapsed(
 
     const minutes =
         Math.floor(
-            totalSeconds /
+            secondsTotal /
             60
         );
 
 
     const seconds =
-        totalSeconds %
+        secondsTotal %
         60;
 
 
@@ -2686,8 +3153,23 @@ function formatElapsed(
 
 
 /* =========================================================
-   VERIFICATION CODE
+   REPORT HELPERS
 ========================================================= */
+
+function displayRecord(value) {
+
+    if (
+        value === null ||
+        value === ""
+    ) {
+
+        return "No response recorded.";
+    }
+
+
+    return escapeHTML(value);
+}
+
 
 function createVerificationCode() {
 
@@ -2720,10 +3202,15 @@ function createVerificationCode() {
 
 
 /* =========================================================
-   FINISH ACTIVITY
+   FINISH
 ========================================================= */
 
-function finishActivity() {
+function finishAssessment() {
+
+    completedChallenges = 4;
+
+    updateProgress();
+
 
     endTime =
         Date.now();
@@ -2736,20 +3223,20 @@ function finishActivity() {
     );
 
 
-    buildMasteryReport();
+    buildTeacherReview();
 
 
-    const report =
+    const review =
         document.getElementById(
-            "masteryReport"
+            "teacherReview"
         );
 
 
-    report.style.display =
+    review.style.display =
         "block";
 
 
-    report.scrollIntoView({
+    review.scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
@@ -2757,38 +3244,30 @@ function finishActivity() {
 
 
 /* =========================================================
-   BUILD MASTERY REPORT
+   BUILD TEACHER REVIEW
 ========================================================= */
 
-function buildMasteryReport() {
+function buildTeacherReview() {
 
-    const name =
+    const student =
         document.getElementById(
             "studentName"
         ).value.trim();
 
 
-    const elapsed =
-        formatElapsed(
-            endTime -
-            startTime
-        );
-
-
-    /* -----------------------------------------------------
-       SUMMARY
-    ----------------------------------------------------- */
-
     document.getElementById(
         "reportStudent"
     ).textContent =
-        name;
+        student;
 
 
     document.getElementById(
         "reportTime"
     ).textContent =
-        elapsed;
+        formatElapsed(
+            endTime -
+            startTime
+        );
 
 
     document.getElementById(
@@ -2801,54 +3280,81 @@ function buildMasteryReport() {
        CHALLENGE 1
     ----------------------------------------------------- */
 
-    const problem1HTML =
+    const p1 =
         radicalHTML(
-            problems[1].original
+            problems[1].radicand
         );
 
 
     document.getElementById(
         "reportProblem1"
     ).innerHTML =
-        problem1HTML;
+        p1;
 
 
     document.getElementById(
-        "reportStudentAnswer1"
+        "reportFirstSetup1"
     ).innerHTML =
-        typedAnswerHTML(
-            studentAnswers[1].outside,
-            studentAnswers[1].inside
+        displayRecord(
+            records[1].firstSetup
+        );
+
+
+    document.getElementById(
+        "reportFirstAnswer1"
+    ).innerHTML =
+        displayRecord(
+            records[1].firstAnswer
+        );
+
+
+    document.getElementById(
+        "reportFinalSetup1"
+    ).innerHTML =
+        displayRecord(
+            records[1].finalSetup
+        );
+
+
+    document.getElementById(
+        "reportFinalAnswer1"
+    ).innerHTML =
+        answerHTML(
+            problems[1].outside,
+            problems[1].inside
         );
 
 
     document.getElementById(
         "reportSolution1"
     ).innerHTML =
-        problem1HTML +
-        " &nbsp;=&nbsp; " +
-        correctAnswerHTML(1);
+        p1 +
+        " = " +
+        answerHTML(
+            problems[1].outside,
+            problems[1].inside
+        );
 
 
     document.getElementById(
         "reportChecks1"
     ).textContent =
-        challengeChecks[1];
+        records[1].checks;
 
 
     document.getElementById(
         "reportWork1"
     ).src =
-        whiteboardImages[1];
+        records[1].workImage;
 
 
     /* -----------------------------------------------------
        CHALLENGE 2
     ----------------------------------------------------- */
 
-    const problem2HTML =
+    const p2 =
         radicalHTML(
-            problems[2].original +
+            problems[2].radicand +
             "x<sup>2</sup>"
         );
 
@@ -2856,49 +3362,78 @@ function buildMasteryReport() {
     document.getElementById(
         "reportProblem2"
     ).innerHTML =
-        problem2HTML;
+        p2;
 
 
     document.getElementById(
-        "reportStudentAnswer2"
+        "reportFirstSetup2"
     ).innerHTML =
-        typedAnswerHTML(
-            studentAnswers[2].outside,
-            studentAnswers[2].inside
+        displayRecord(
+            records[2].firstSetup
+        );
+
+
+    document.getElementById(
+        "reportFirstAnswer2"
+    ).innerHTML =
+        displayRecord(
+            records[2].firstAnswer
+        );
+
+
+    document.getElementById(
+        "reportFinalSetup2"
+    ).innerHTML =
+        displayRecord(
+            records[2].finalSetup
+        );
+
+
+    document.getElementById(
+        "reportFinalAnswer2"
+    ).innerHTML =
+        answerHTML(
+            problems[2].outside,
+            problems[2].inside
+        );
+
+
+    document.getElementById(
+        "reportReasoning2"
+    ).innerHTML =
+        displayRecord(
+            records[2].reasoning
         );
 
 
     document.getElementById(
         "reportSolution2"
     ).innerHTML =
-        problem2HTML +
-        " &nbsp;=&nbsp; " +
-        correctAnswerHTML(2);
+        p2 +
+        " = " +
+        answerHTML(
+            problems[2].outside,
+            problems[2].inside
+        );
 
 
     document.getElementById(
         "reportChecks2"
     ).textContent =
-        challengeChecks[2];
+        records[2].checks;
 
 
     document.getElementById(
         "reportWork2"
     ).src =
-        whiteboardImages[2];
+        records[2].workImage;
 
 
     /* -----------------------------------------------------
        CHALLENGE 3
-
-       ORIGINAL PROBLEM:
-       TRUE FRACTION INSIDE SQRT USING MATHML.
-
-       CORRECT ANSWER:
-       TRUE FRACTIONAL COEFFICIENT + RADICAL USING MATHML.
     ----------------------------------------------------- */
 
-    const problem3HTML =
+    const p3 =
         fractionUnderRadicalHTML(
             problems[3].numerator,
             problems[3].denominator
@@ -2908,96 +3443,134 @@ function buildMasteryReport() {
     document.getElementById(
         "reportProblem3"
     ).innerHTML =
-        problem3HTML;
+        p3;
 
 
     document.getElementById(
-        "reportStudentAnswer3"
+        "reportFirstSetup3"
     ).innerHTML =
-        typedAnswerHTML(
-            studentAnswers[3].outside,
-            studentAnswers[3].inside
+        displayRecord(
+            records[3].firstSetup
         );
 
 
-    const correct3HTML =
-        fractionCoefficientRadicalHTML(
-            problems[3].outsideNumerator,
-            problems[3].outsideDenominator,
-            problems[3].inside
+    document.getElementById(
+        "reportFirstAnswer3"
+    ).innerHTML =
+        displayRecord(
+            records[3].firstAnswer
+        );
+
+
+    document.getElementById(
+        "reportFinalSetup3"
+    ).innerHTML =
+        displayRecord(
+            records[3].finalSetup
+        );
+
+
+    document.getElementById(
+        "reportFinalAnswer3"
+    ).innerHTML =
+        fractionalCoefficientRadicalHTML(
+            problems[3].a,
+            problems[3].d,
+            problems[3].b
         );
 
 
     document.getElementById(
         "reportSolution3"
     ).innerHTML =
-        problem3HTML +
-        " &nbsp;=&nbsp; " +
-        correct3HTML;
+        p3 +
+        " = " +
+        fractionalCoefficientRadicalHTML(
+            problems[3].a,
+            problems[3].d,
+            problems[3].b
+        );
 
 
     document.getElementById(
         "reportChecks3"
     ).textContent =
-        challengeChecks[3];
+        records[3].checks;
 
 
     document.getElementById(
         "reportWork3"
     ).src =
-        whiteboardImages[3];
+        records[3].workImage;
 
 
     /* -----------------------------------------------------
        CHALLENGE 4
     ----------------------------------------------------- */
 
-    const problem4HTML =
+    const target4 =
+        problems[4].targetOutside +
         radicalHTML(
-            problems[4].original +
-            "x<sup>" +
-            problems[4].insideExponent +
-            "</sup>"
+            problems[4].targetInside
         );
 
 
     document.getElementById(
-        "reportProblem4"
+        "reportTarget4"
     ).innerHTML =
-        problem4HTML;
+        target4;
 
 
     document.getElementById(
-        "reportStudentAnswer4"
+        "reportFirstSetup4"
     ).innerHTML =
-        typedAnswerHTML(
-            studentAnswers[4].outside,
-            studentAnswers[4].inside
+        displayRecord(
+            records[4].firstSetup
+        );
+
+
+    document.getElementById(
+        "reportFirstAnswer4"
+    ).innerHTML =
+        displayRecord(
+            records[4].firstAnswer
+        );
+
+
+    document.getElementById(
+        "reportFinalSetup4"
+    ).innerHTML =
+        displayRecord(
+            records[4].finalSetup
+        );
+
+
+    document.getElementById(
+        "reportFinalAnswer4"
+    ).innerHTML =
+        radicalHTML(
+            problems[4].correctRadicand
         );
 
 
     document.getElementById(
         "reportSolution4"
     ).innerHTML =
-        problem4HTML +
-        " &nbsp;=&nbsp; " +
-        correctAnswerHTML(4);
+        radicalHTML(
+            problems[4].correctRadicand
+        ) +
+        " = " +
+        target4;
 
 
     document.getElementById(
         "reportChecks4"
     ).textContent =
-        challengeChecks[4];
-
-
-    document.getElementById(
-        "reportWork4"
-    ).src =
-        whiteboardImages[4];
+        records[4].checks;
 
 
     /* -----------------------------------------------------
-       COMPLETION RECORD
+       COMPLETION
     ----------------------------------------------------- */
 
     document.getElementById(
@@ -3016,7 +3589,7 @@ function buildMasteryReport() {
 
 
 /* =========================================================
-   BEGIN ACTIVITY
+   BEGIN
 ========================================================= */
 
 document.getElementById(
@@ -3032,8 +3605,7 @@ document.getElementById(
 
 
         if (
-            name.length <
-            3
+            name.length < 3
         ) {
 
             alert(
@@ -3043,10 +3615,6 @@ document.getElementById(
             return;
         }
 
-
-        /*
-           Start timer only when student actually begins.
-        */
 
         startTime =
             Date.now();
