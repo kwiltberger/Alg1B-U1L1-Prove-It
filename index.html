@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Radical Expressions Mastery Challenge</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 22px;
+    background: #f6f9fb;
+    color: #1f2933;
+    font-family: Arial, sans-serif;
+    line-height: 1.55;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.hero {
+    background: #0f2d44;
+    color: white;
+    padding: 24px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 29px;
+}
+
+.hero p {
+    margin: 6px 0 0;
+}
+
+.card {
+    background: white;
+    border: 1px solid #d6e6ef;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 18px;
+}
+
+.overview {
+    background: #f0f7fb;
+    border-left: 6px solid #2f80a8;
+}
+
+.goal {
+    background: #eefaf1;
+    border-left: 6px solid #3ca65c;
+}
+
+.reminder {
+    background: #fff8e6;
+    border-left: 6px solid #f2b705;
+}
+
+h2,
+h3 {
+    color: #0f2d44;
+}
+
+button {
+    font-family: Arial, sans-serif;
+}
+
+.primary-button {
+    border: 0;
+    background: #0f2d44;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.secondary-button {
+    border: 1px solid #0f2d44;
+    background: white;
+    color: #0f2d44;
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover,
+button:focus {
+    outline: 3px solid #b7d7e8;
+    outline-offset: 2px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 14px;
+}
+
+input,
+textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #9aabb5;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+input.short {
+    max-width: 130px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.math-display {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 30px;
+}
+
+.radical {
+    display: inline-flex;
+    align-items: flex-start;
+    white-space: nowrap;
+}
+
+.root-symbol {
+    font-size: 1.22em;
+    line-height: 1;
+}
+
+.radicand {
+    border-top: 2px solid currentColor;
+    padding: 1px 5px 0 5px;
+    line-height: 1.05;
+}
+
+.fraction {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.numerator {
+    padding: 0 5px 2px 5px;
+}
+
+.denominator {
+    border-top: 1.5px solid currentColor;
+    padding: 2px 5px 0 5px;
+}
+
+.answer-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.answer-piece {
+    min-width: 110px;
+}
+
+.feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    display: none;
+}
+
+.feedback.correct {
+    display: block;
+    background: #eefaf1;
+    border-left: 6px solid #3ca65c;
+}
+
+.feedback.incorrect {
+    display: block;
+    background: #fff8e6;
+    border-left: 6px solid #f2b705;
+}
+
+.progress-wrap {
+    margin-top: 18px;
+}
+
+.progress-bar {
+    height: 18px;
+    background: #d6e6ef;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background: #3ca65c;
+    transition: width 0.3s ease;
+}
+
+.workspace-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 18px;
+    align-items: start;
+}
+
+.whiteboard-panel {
+    position: sticky;
+    top: 16px;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 320px;
+    background: white;
+    border: 2px solid #9aabb5;
+    border-radius: 8px;
+    touch-action: none;
+}
+
+.whiteboard-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.challenge {
+    display: none;
+}
+
+.challenge.active {
+    display: block;
+}
+
+.locked-message {
+    color: #52616b;
+    font-style: italic;
+}
+
+.certificate {
+    display: none;
+    border: 8px double #0f2d44;
+    background: white;
+    padding: 36px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.certificate h2 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.certificate-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.verification {
+    font-family: monospace;
+    font-size: 17px;
+    background: #f6f9fb;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 820px) {
+    .workspace-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .whiteboard-panel {
+        position: static;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #certificate,
+    #certificate * {
+        visibility: visible;
+    }
+
+    #certificate {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="hero no-print">
+        <h1>Radical Expressions Mastery Challenge</h1>
+        <p>Algebra 1B | Unit 1 | Week 1</p>
+    </header>
+
+    <section id="startScreen" class="card overview no-print">
+
+        <h2>Before You Begin</h2>
+
+        <p>
+            You will complete four randomized radical-expression challenges.
+            Each challenge must be correct before the next one unlocks.
+        </p>
+
+        <label for="studentName">First and Last Name</label>
+        <input id="studentName" type="text" autocomplete="name">
+
+        <div class="card goal">
+            <strong>You will demonstrate that you can:</strong>
+            <p>☐ Simplify numerical radical expressions.</p>
+            <p>☐ Simplify radicals containing variables.</p>
+            <p>☐ Simplify radicals involving fractions.</p>
+            <p>☐ Explain why an expression is completely simplified.</p>
+        </div>
+
+        <button class="primary-button" id="beginButton">
+            Begin Challenge
+        </button>
+
+    </section>
+
+    <div id="activity" class="hidden no-print">
+
+        <div class="progress-wrap">
+            <p id="progressText"><strong>Progress:</strong> 0 of 4 mastered</p>
+
+            <div class="progress-bar" aria-hidden="true">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="workspace-layout">
+
+            <main>
+
+                <!-- CHALLENGE 1 -->
+                <section id="challenge1" class="card challenge active">
+
+                    <h2>Challenge 1: Numerical Radical</h2>
+
+                    <p>Simplify the radical completely.</p>
+
+                    <div id="problem1" class="math-display"></div>
+
+                    <div class="answer-row">
+
+                        <div class="answer-piece">
+                            <label for="c1Coefficient">Coefficient outside the radical</label>
+                            <input id="c1Coefficient" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c1Radicand">Number left under the radical</label>
+                            <input id="c1Radicand" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                    </div>
+
+                    <label for="c1Explanation">
+                        Explain the perfect-square factor you used.
+                    </label>
+
+                    <textarea id="c1Explanation"
+                        placeholder="Example: I factored the radicand as ..."></textarea>
+
+                    <p>
+                        <button class="primary-button" onclick="checkChallenge1()">
+                            Check Challenge 1
+                        </button>
+                    </p>
+
+                    <div id="feedback1" class="feedback" aria-live="polite"></div>
+
+                </section>
+
+
+                <!-- CHALLENGE 2 -->
+                <section id="challenge2" class="card challenge">
+
+                    <h2>Challenge 2: Radical With a Variable</h2>
+
+                    <p>Assume <strong>x ≥ 0</strong>. Simplify completely.</p>
+
+                    <div id="problem2" class="math-display"></div>
+
+                    <div class="answer-row">
+
+                        <div class="answer-piece">
+                            <label for="c2Coefficient">Numerical coefficient</label>
+                            <input id="c2Coefficient" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c2Radicand">Number left under the radical</label>
+                            <input id="c2Radicand" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                    </div>
+
+                    <label for="c2Explanation">
+                        Explain what happened to x² when you simplified.
+                    </label>
+
+                    <textarea id="c2Explanation"></textarea>
+
+                    <p>
+                        <button class="primary-button" onclick="checkChallenge2()">
+                            Check Challenge 2
+                        </button>
+                    </p>
+
+                    <div id="feedback2" class="feedback" aria-live="polite"></div>
+
+                </section>
+
+
+                <!-- CHALLENGE 3 -->
+                <section id="challenge3" class="card challenge">
+
+                    <h2>Challenge 3: Radical With a Fraction</h2>
+
+                    <p>Simplify completely.</p>
+
+                    <div id="problem3" class="math-display"></div>
+
+                    <p>
+                        Enter your answer in the form
+                        <strong>(coefficient × radical) / denominator</strong>.
+                    </p>
+
+                    <div class="answer-row">
+
+                        <div class="answer-piece">
+                            <label for="c3Coefficient">Coefficient</label>
+                            <input id="c3Coefficient" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c3Radicand">Radicand</label>
+                            <input id="c3Radicand" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c3Denominator">Denominator</label>
+                            <input id="c3Denominator" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                    </div>
+
+                    <label for="c3Explanation">
+                        Explain how you simplified the numerator and denominator.
+                    </label>
+
+                    <textarea id="c3Explanation"></textarea>
+
+                    <p>
+                        <button class="primary-button" onclick="checkChallenge3()">
+                            Check Challenge 3
+                        </button>
+                    </p>
+
+                    <div id="feedback3" class="feedback" aria-live="polite"></div>
+
+                </section>
+
+
+                <!-- CHALLENGE 4 -->
+                <section id="challenge4" class="card challenge">
+
+                    <h2>Challenge 4: Mixed Radical Review</h2>
+
+                    <p>Assume <strong>x ≥ 0</strong>. Simplify completely.</p>
+
+                    <div id="problem4" class="math-display"></div>
+
+                    <div class="answer-row">
+
+                        <div class="answer-piece">
+                            <label for="c4Coefficient">Numerical coefficient</label>
+                            <input id="c4Coefficient" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c4Exponent">Exponent on x</label>
+                            <input id="c4Exponent" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                        <div class="answer-piece">
+                            <label for="c4Radicand">Number left under the radical</label>
+                            <input id="c4Radicand" class="short" type="number" inputmode="numeric">
+                        </div>
+
+                    </div>
+
+                    <label for="c4Explanation">
+                        Explain why your final radical cannot be simplified any further.
+                    </label>
+
+                    <textarea id="c4Explanation"></textarea>
+
+                    <p>
+                        <button class="primary-button" onclick="checkChallenge4()">
+                            Check Challenge 4
+                        </button>
+                    </p>
+
+                    <div id="feedback4" class="feedback" aria-live="polite"></div>
+
+                </section>
+
+            </main>
+
+
+            <!-- WHITEBOARD -->
+            <aside class="card whiteboard-panel">
+
+                <h2>Digital Whiteboard</h2>
+
+                <p>
+                    Use this space to factor radicands and show your work.
+                    The whiteboard stays available through all four challenges.
+                </p>
+
+                <canvas id="whiteboard" width="640" height="640"
+                    aria-label="Optional digital whiteboard"></canvas>
+
+                <div class="whiteboard-controls">
+
+                    <button class="secondary-button" onclick="setTool('pen')">
+                        Pen
+                    </button>
+
+                    <button class="secondary-button" onclick="setTool('eraser')">
+                        Eraser
+                    </button>
+
+                    <button class="secondary-button" onclick="undoStroke()">
+                        Undo
+                    </button>
+
+                    <button class="secondary-button" onclick="clearBoard()">
+                        Clear
+                    </button>
+
+                </div>
+
+                <label for="lineWidth">Line Width</label>
+
+                <input id="lineWidth"
+                    type="range"
+                    min="2"
+                    max="15"
+                    value="4">
+
+                <label for="workNotes">Keyboard-Friendly Work Notes</label>
+
+                <textarea id="workNotes"
+                    placeholder="You may also type your scratch work here."></textarea>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+
+    <!-- CERTIFICATE -->
+    <section id="certificate" class="certificate">
+
+        <h2>Certificate of Mastery</h2>
+
+        <p>Algebra 1B | Unit 1 | Week 1</p>
+
+        <p>Radical Expressions Mastery Challenge</p>
+
+        <p>This certifies that</p>
+
+        <div id="certificateName" class="certificate-name"></div>
+
+        <p>successfully mastered</p>
+
+        <p style="font-size: 24px;">
+            <strong>4 of 4 Radical Expression Challenges</strong>
+        </p>
+
+        <p>
+            The student demonstrated proficiency with numerical radicals,
+            variables, fractions, and mixed radical expressions.
+        </p>
+
+        <p id="certificateDate"></p>
+
+        <p>
+            Verification Code:
+            <span id="verificationCode" class="verification"></span>
+        </p>
+
+        <p class="no-print">
+            <button class="primary-button" onclick="window.print()">
+                Print / Save as PDF
+            </button>
+        </p>
+
+    </section>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* ---------------------------------------------------
+   MATH / PROBLEM GENERATION
+--------------------------------------------------- */
+
+const squareFreeValues = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15];
+
+let challenge1;
+let challenge2;
+let challenge3;
+let challenge4;
+
+let mastered = 0;
+
+function randomChoice(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function gcd(a, b) {
+    while (b !== 0) {
+        const temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return Math.abs(a);
+}
+
+
+/* ---------------------------------------------------
+   RADICAL FORMATTING
+--------------------------------------------------- */
+
+function radicalHTML(content) {
+    return `
+        <span class="radical">
+            <span class="root-symbol">&radic;</span>
+            <span class="radicand">${content}</span>
+        </span>
+    `;
+}
+
+function fractionHTML(numerator, denominator) {
+    return `
+        <span class="fraction">
+            <span class="numerator">${numerator}</span>
+            <span class="denominator">${denominator}</span>
+        </span>
+    `;
+}
+
+
+/* ---------------------------------------------------
+   CREATE PROBLEMS
+--------------------------------------------------- */
+
+function generateProblems() {
+
+    /* Challenge 1 */
+
+    const outside1 = randomInteger(2, 9);
+    const inside1 = randomChoice(squareFreeValues);
+
+    challenge1 = {
+        outside: outside1,
+        inside: inside1,
+        original: outside1 * outside1 * inside1
+    };
+
+
+    /* Challenge 2 */
+
+    const outside2 = randomInteger(2, 8);
+    const inside2 = randomChoice(squareFreeValues);
+
+    challenge2 = {
+        outside: outside2,
+        inside: inside2,
+        original: outside2 * outside2 * inside2
+    };
+
+
+    /* Challenge 3 */
+
+    let numeratorCoefficient;
+    let denominator;
+
+    do {
+        numeratorCoefficient = randomInteger(2, 8);
+        denominator = randomInteger(2, 8);
+    } while (gcd(numeratorCoefficient, denominator) !== 1);
+
+    const inside3 = randomChoice(squareFreeValues);
+
+    challenge3 = {
+        coefficient: numeratorCoefficient,
+        denominator: denominator,
+        inside: inside3,
+        numeratorRadicand:
+            numeratorCoefficient *
+            numeratorCoefficient *
+            inside3,
+        denominatorRadicand:
+            denominator *
+            denominator
+    };
+
+
+    /* Challenge 4 */
+
+    const outside4 = randomInteger(2, 8);
+    const inside4 = randomChoice(squareFreeValues);
+    const variableOutsideExponent = randomInteger(2, 4);
+    const variableInsideExponent = variableOutsideExponent * 2;
+
+    challenge4 = {
+        outside: outside4,
+        inside: inside4,
+        variableOutsideExponent: variableOutsideExponent,
+        variableInsideExponent: variableInsideExponent,
+        original: outside4 * outside4 * inside4
+    };
+
+
+    renderProblems();
+}
+
+
+/* ---------------------------------------------------
+   DISPLAY PROBLEMS
+--------------------------------------------------- */
+
+function renderProblems() {
+
+    document.getElementById("problem1").innerHTML =
+        radicalHTML(challenge1.original);
+
+
+    document.getElementById("problem2").innerHTML =
+        radicalHTML(
+            challenge2.original +
+            "x<sup>2</sup>"
+        );
+
+
+    const fraction = fractionHTML(
+        challenge3.numeratorRadicand,
+        challenge3.denominatorRadicand
+    );
+
+    document.getElementById("problem3").innerHTML =
+        radicalHTML(fraction);
+
+
+    document.getElementById("problem4").innerHTML =
+        radicalHTML(
+            challenge4.original +
+            "x<sup>" +
+            challenge4.variableInsideExponent +
+            "</sup>"
+        );
+}
+
+
+/* ---------------------------------------------------
+   RESPONSE HELPERS
+--------------------------------------------------- */
+
+function numericValue(id) {
+    return Number(document.getElementById(id).value);
+}
+
+function explanationReady(id) {
+    return document
+        .getElementById(id)
+        .value
+        .trim()
+        .length >= 12;
+}
+
+function setFeedback(number, correct, message) {
+
+    const feedback =
+        document.getElementById("feedback" + number);
+
+    feedback.className =
+        "feedback " +
+        (correct ? "correct" : "incorrect");
+
+    feedback.textContent = message;
+}
+
+function unlockChallenge(current, next) {
+
+    mastered++;
+
+    updateProgress();
+
+    document
+        .getElementById("challenge" + current)
+        .classList
+        .remove("active");
+
+    if (next <= 4) {
+
+        document
+            .getElementById("challenge" + next)
+            .classList
+            .add("active");
+
+        document
+            .getElementById("challenge" + next)
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    } else {
+        finishActivity();
+    }
+}
+
+function updateProgress() {
+
+    document.getElementById("progressText").innerHTML =
+        "<strong>Progress:</strong> " +
+        mastered +
+        " of 4 mastered";
+
+    document.getElementById("progressFill").style.width =
+        (mastered / 4 * 100) + "%";
+}
+
+
+/* ---------------------------------------------------
+   CHECK CHALLENGE 1
+--------------------------------------------------- */
+
+function checkChallenge1() {
+
+    const coefficient =
+        numericValue("c1Coefficient");
+
+    const radicand =
+        numericValue("c1Radicand");
+
+    if (!explanationReady("c1Explanation")) {
+
+        setFeedback(
+            1,
+            false,
+            "Add a brief explanation of the perfect-square factor you used."
+        );
+
+        return;
+    }
+
+    if (
+        coefficient === challenge1.outside &&
+        radicand === challenge1.inside
+    ) {
+
+        setFeedback(
+            1,
+            true,
+            "Correct! Your radical is completely simplified."
+        );
+
+        setTimeout(() => {
+            unlockChallenge(1, 2);
+        }, 700);
+
+    } else {
+
+        setFeedback(
+            1,
+            false,
+            "Not quite. Look for the largest perfect-square factor and try again."
+        );
+    }
+}
+
+
+/* ---------------------------------------------------
+   CHECK CHALLENGE 2
+--------------------------------------------------- */
+
+function checkChallenge2() {
+
+    const coefficient =
+        numericValue("c2Coefficient");
+
+    const radicand =
+        numericValue("c2Radicand");
+
+    if (!explanationReady("c2Explanation")) {
+
+        setFeedback(
+            2,
+            false,
+            "Explain what happened to x² when you took the square root."
+        );
+
+        return;
+    }
+
+    if (
+        coefficient === challenge2.outside &&
+        radicand === challenge2.inside
+    ) {
+
+        setFeedback(
+            2,
+            true,
+            "Correct! Because x ≥ 0, the square root of x² is x."
+        );
+
+        setTimeout(() => {
+            unlockChallenge(2, 3);
+        }, 700);
+
+    } else {
+
+        setFeedback(
+            2,
+            false,
+            "Check both the numerical perfect-square factor and the variable."
+        );
+    }
+}
+
+
+/* ---------------------------------------------------
+   CHECK CHALLENGE 3
+--------------------------------------------------- */
+
+function checkChallenge3() {
+
+    const coefficient =
+        numericValue("c3Coefficient");
+
+    const radicand =
+        numericValue("c3Radicand");
+
+    const denominator =
+        numericValue("c3Denominator");
+
+    if (!explanationReady("c3Explanation")) {
+
+        setFeedback(
+            3,
+            false,
+            "Add a brief explanation of how you simplified the numerator and denominator."
+        );
+
+        return;
+    }
+
+    if (
+        coefficient === challenge3.coefficient &&
+        radicand === challenge3.inside &&
+        denominator === challenge3.denominator
+    ) {
+
+        setFeedback(
+            3,
+            true,
+            "Correct! The numerator and denominator have both been simplified."
+        );
+
+        setTimeout(() => {
+            unlockChallenge(3, 4);
+        }, 700);
+
+    } else {
+
+        setFeedback(
+            3,
+            false,
+            "Not quite. Simplify the square root in the numerator and the square root in the denominator separately."
+        );
+    }
+}
+
+
+/* ---------------------------------------------------
+   CHECK CHALLENGE 4
+--------------------------------------------------- */
+
+function checkChallenge4() {
+
+    const coefficient =
+        numericValue("c4Coefficient");
+
+    const exponent =
+        numericValue("c4Exponent");
+
+    const radicand =
+        numericValue("c4Radicand");
+
+    if (!explanationReady("c4Explanation")) {
+
+        setFeedback(
+            4,
+            false,
+            "Explain why the number remaining under the radical cannot be simplified further."
+        );
+
+        return;
+    }
+
+    if (
+        coefficient === challenge4.outside &&
+        exponent === challenge4.variableOutsideExponent &&
+        radicand === challenge4.inside
+    ) {
+
+        setFeedback(
+            4,
+            true,
+            "Correct! You mastered the final challenge."
+        );
+
+        setTimeout(() => {
+            unlockChallenge(4, 5);
+        }, 700);
+
+    } else {
+
+        setFeedback(
+            4,
+            false,
+            "Check the perfect-square numerical factor and remember that taking a square root divides an even variable exponent by 2."
+        );
+    }
+}
+
+
+/* ---------------------------------------------------
+   CERTIFICATE
+--------------------------------------------------- */
+
+function createVerificationCode() {
+
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code = "U1R-";
+
+    for (let i = 0; i < 8; i++) {
+        code += chars.charAt(
+            Math.floor(Math.random() * chars.length)
+        );
+    }
+
+    return code;
+}
+
+function finishActivity() {
+
+    document
+        .getElementById("activity")
+        .classList
+        .add("hidden");
+
+    const name =
+        document
+        .getElementById("studentName")
+        .value
+        .trim();
+
+    document.getElementById("certificateName").textContent =
+        name;
+
+    document.getElementById("certificateDate").textContent =
+        "Completed: " +
+        new Date().toLocaleDateString();
+
+    document.getElementById("verificationCode").textContent =
+        createVerificationCode();
+
+    const certificate =
+        document.getElementById("certificate");
+
+    certificate.style.display = "block";
+
+    certificate.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+/* ---------------------------------------------------
+   START
+--------------------------------------------------- */
+
+document
+    .getElementById("beginButton")
+    .addEventListener("click", function () {
+
+        const studentName =
+            document
+            .getElementById("studentName")
+            .value
+            .trim();
+
+        if (studentName.length < 3) {
+            alert("Please enter your first and last name before beginning.");
+            return;
+        }
+
+        document
+            .getElementById("startScreen")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("activity")
+            .classList
+            .remove("hidden");
+
+        generateProblems();
+    });
+
+
+/* ---------------------------------------------------
+   WHITEBOARD
+--------------------------------------------------- */
+
+const canvas = document.getElementById("whiteboard");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let tool = "pen";
+let strokes = [];
+let currentStroke = [];
+
+function canvasPoint(event) {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const source =
+        event.touches ?
+        event.touches[0] :
+        event;
+
+    return {
+        x:
+            (source.clientX - rect.left) *
+            (canvas.width / rect.width),
+
+        y:
+            (source.clientY - rect.top) *
+            (canvas.height / rect.height)
+    };
+}
+
+function startDrawing(event) {
+
+    event.preventDefault();
+
+    drawing = true;
+
+    const point =
+        canvasPoint(event);
+
+    currentStroke = [{
+        x: point.x,
+        y: point.y,
+        tool: tool,
+        width:
+            Number(
+                document
+                .getElementById("lineWidth")
+                .value
+            )
+    }];
+
+    drawPoint(point);
+}
+
+function draw(event) {
+
+    if (!drawing) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const point =
+        canvasPoint(event);
+
+    const lastPoint =
+        currentStroke[
+            currentStroke.length - 1
+        ];
+
+    const data = {
+        x: point.x,
+        y: point.y,
+        tool: tool,
+        width:
+            Number(
+                document
+                .getElementById("lineWidth")
+                .value
+            )
+    };
+
+    drawSegment(
+        lastPoint,
+        data
+    );
+
+    currentStroke.push(data);
+}
+
+function stopDrawing() {
+
+    if (!drawing) {
+        return;
+    }
+
+    drawing = false;
+
+    if (currentStroke.length > 0) {
+        strokes.push(currentStroke);
+    }
+
+    currentStroke = [];
+}
+
+function drawPoint(point) {
+
+    ctx.beginPath();
+
+    ctx.arc(
+        point.x,
+        point.y,
+        2,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        tool === "eraser" ?
+        "#ffffff" :
+        "#1f2933";
+
+    ctx.fill();
+}
+
+function drawSegment(a, b) {
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        a.x,
+        a.y
+    );
+
+    ctx.lineTo(
+        b.x,
+        b.y
+    );
+
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    ctx.lineWidth = b.width;
+
+    ctx.strokeStyle =
+        b.tool === "eraser" ?
+        "#ffffff" :
+        "#1f2933";
+
+    ctx.stroke();
+}
+
+function redrawBoard() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    strokes.forEach(stroke => {
+
+        for (
+            let i = 1;
+            i < stroke.length;
+            i++
+        ) {
+
+            drawSegment(
+                stroke[i - 1],
+                stroke[i]
+            );
+        }
+    });
+}
+
+function setTool(newTool) {
+    tool = newTool;
+}
+
+function undoStroke() {
+
+    strokes.pop();
+    redrawBoard();
+}
+
+function clearBoard() {
+
+    strokes = [];
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+}
+
+
+/* Mouse */
+
+canvas.addEventListener(
+    "mousedown",
+    startDrawing
+);
+
+canvas.addEventListener(
+    "mousemove",
+    draw
+);
+
+window.addEventListener(
+    "mouseup",
+    stopDrawing
+);
+
+
+/* Touch */
+
+canvas.addEventListener(
+    "touchstart",
+    startDrawing,
+    { passive: false }
+);
+
+canvas.addEventListener(
+    "touchmove",
+    draw,
+    { passive: false }
+);
+
+canvas.addEventListener(
+    "touchend",
+    stopDrawing
+);
+</script>
+
+</body>
+</html>
